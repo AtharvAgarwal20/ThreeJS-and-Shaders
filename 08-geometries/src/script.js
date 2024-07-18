@@ -13,27 +13,17 @@ const scene = new THREE.Scene()
 // Object
 // const geometry = new THREE.BoxGeometry(1, 1, 1, 4, 4, 4)
 
-const positionsArray = new Float32Array([
-    0, 0, 0,
-    0, 1, 0,
-    1, 0, 0
-])
+const geometry = new THREE.BufferGeometry()
 
-// positionsArray[0] = 0       // First vertex x-coordinate
-// positionsArray[1] = 0       // First vertex y-coordinate
-// positionsArray[2] = 0       // First vertex z-coordinate
+const count = 500
 
-// positionsArray[3] = 0       // Second vertex x-coordinate
-// positionsArray[4] = 1       // Second vertex y-coordinate
-// positionsArray[5] = 0       // Second vertex z-coordinate
+const positionsArray = new Float32Array(count * 3 * 3)          // No. of triangles * no. of vertices * no. of coordinates per vertex
 
-// positionsArray[6] = 1       // Third vertex x-coordinate
-// positionsArray[7] = 0       // Third vertex y-coordinate
-// positionsArray[8] = 0       // Third vertex z-coordinate
+for (let i = 0; i < count; i++) {
+    positionsArray[i] = (Math.random() - 0.5) * 4
+}
 
 const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
-
-const geometry = new THREE.BufferGeometry()
 
 geometry.setAttribute('position', positionsAttribute)
 
