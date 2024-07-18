@@ -11,8 +11,33 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+// const geometry = new THREE.BoxGeometry(1, 1, 1, 4, 4, 4)
+
+const positionsArray = new Float32Array([
+    0, 0, 0,
+    0, 1, 0,
+    1, 0, 0
+])
+
+// positionsArray[0] = 0       // First vertex x-coordinate
+// positionsArray[1] = 0       // First vertex y-coordinate
+// positionsArray[2] = 0       // First vertex z-coordinate
+
+// positionsArray[3] = 0       // Second vertex x-coordinate
+// positionsArray[4] = 1       // Second vertex y-coordinate
+// positionsArray[5] = 0       // Second vertex z-coordinate
+
+// positionsArray[6] = 1       // Third vertex x-coordinate
+// positionsArray[7] = 0       // Third vertex y-coordinate
+// positionsArray[8] = 0       // Third vertex z-coordinate
+
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
+
+const geometry = new THREE.BufferGeometry()
+
+geometry.setAttribute('position', positionsAttribute)
+
+const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
@@ -22,8 +47,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -56,8 +80,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 // Animate
 const clock = new THREE.Clock()
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update controls
