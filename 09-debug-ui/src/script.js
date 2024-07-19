@@ -42,7 +42,14 @@ debugObject.spin = () => {
     })
 }
 
-gui.add(debugObject, 'spin')
+gui.add(debugObject, 'spin').name("Spin the Cube")
+
+debugObject.subdivisions = 2
+
+gui.add(debugObject, 'subdivisions').min(1).max(20).step(1).onFinishChange(() => {
+    mesh.geometry.dispose()
+    mesh.geometry = new THREE.BoxGeometry(1, 1, 1, debugObject.subdivisions, debugObject.subdivisions, debugObject.subdivisions)
+})
 
 /**
  * Sizes
