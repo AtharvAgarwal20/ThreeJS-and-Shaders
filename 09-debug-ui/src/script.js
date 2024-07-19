@@ -35,7 +35,14 @@ gui.addColor(debugObject, 'cubeColor').onChange(() => {
     material.color.set(debugObject.cubeColor)
 })
 
+debugObject.spin = () => {
+    gsap.to(mesh.rotation, {
+        y: mesh.rotation.y + Math.PI * 2,
+        duration: 3
+    })
+}
 
+gui.add(debugObject, 'spin')
 
 /**
  * Sizes
