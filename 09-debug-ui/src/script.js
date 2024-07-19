@@ -4,7 +4,13 @@ import gsap from 'gsap'
 import GUI from 'lil-gui'
 
 // Debug
-const gui = new GUI()
+const gui = new GUI({
+    width: 300,
+    title: "Nice little title",
+    closeFolders: true              // Closes all folders
+})
+gui.close()                         // Closes the GUI
+// gui.hide()                       // Hides the GUI
 const debugObject = {}
 
 /**
@@ -25,13 +31,15 @@ const material = new THREE.MeshBasicMaterial({ color: debugObject.cubeColor })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
-gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('Elevation')
+const cubeTweaks = gui.addFolder('Awesome cube')
 
-gui.add(mesh, 'visible')
+cubeTweaks.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('Elevation')
 
-gui.add(mesh.material, 'wireframe')
+cubeTweaks.add(mesh, 'visible')
 
-gui.addColor(debugObject, 'cubeColor').onChange(() => {
+cubeTweaks.add(mesh.material, 'wireframe')
+
+cubeTweaks.addColor(debugObject, 'cubeColor').onChange(() => {
     material.color.set(debugObject.cubeColor)
 })
 
@@ -42,11 +50,11 @@ debugObject.spin = () => {
     })
 }
 
-gui.add(debugObject, 'spin').name("Spin the Cube")
+cubeTweaks.add(debugObject, 'spin').name("Spin the Cube")
 
 debugObject.subdivisions = 2
 
-gui.add(debugObject, 'subdivisions').min(1).max(20).step(1).onFinishChange(() => {
+cubeTweaks.add(debugObject, 'subdivisions').min(1).max(20).step(1).onFinishChange(() => {
     mesh.geometry.dispose()
     mesh.geometry = new THREE.BoxGeometry(1, 1, 1, debugObject.subdivisions, debugObject.subdivisions, debugObject.subdivisions)
 })
