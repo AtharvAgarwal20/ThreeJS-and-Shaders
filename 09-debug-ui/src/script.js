@@ -1,6 +1,11 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+import GUI from 'lil-gui'
+
+// Debug
+const gui = new GUI()
+const debugObject = {}
 
 /**
  * Base
@@ -14,10 +19,23 @@ const scene = new THREE.Scene()
 /**
  * Object
  */
+debugObject.cubeColor = '#ff0000'
 const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
-const material = new THREE.MeshBasicMaterial({ color: '#ff0000' })
+const material = new THREE.MeshBasicMaterial({ color: debugObject.cubeColor })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
+
+gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('Elevation')
+
+gui.add(mesh, 'visible')
+
+gui.add(mesh.material, 'wireframe')
+
+gui.addColor(debugObject, 'cubeColor').onChange(() => {
+    material.color.set(debugObject.cubeColor)
+})
+
+
 
 /**
  * Sizes
@@ -27,8 +45,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -70,8 +87,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  */
 const clock = new THREE.Clock()
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update controls
