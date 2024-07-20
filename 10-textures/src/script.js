@@ -2,9 +2,40 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 // Textures
-const textureLoader = new THREE.TextureLoader()
-const texture = textureLoader.load('/textures/door/color.jpg')
-texture.colorSpace = THREE.SRGBColorSpace
+const loadingManager = new THREE.LoadingManager()
+
+loadingManager.onStart = () => {
+    console.log("onStart")
+}
+
+loadingManager.onProgress = () => {
+    console.log("onProgress")
+}
+
+loadingManager.onLoad = () => {
+    console.log("onLoad")
+}
+
+loadingManager.onError = (error) => {
+    console.log("onError")
+    console.log(error)
+}
+
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const colorTexture = textureLoader.load('/textures/door/color.jpg')
+colorTexture.colorSpace = THREE.SRGBColorSpace
+const alphaTexture = textureLoader.load('/textures/door/alpha.jpg')
+alphaTexture.colorSpace = THREE.SRGBColorSpace
+const heightTexture = textureLoader.load('/textures/door/height.jpg')
+heightTexture.colorSpace = THREE.SRGBColorSpace
+const normalTexture = textureLoader.load('/textures/door/normal.jpg')
+normalTexture.colorSpace = THREE.SRGBColorSpace
+const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+ambientOcclusionTexture.colorSpace = THREE.SRGBColorSpace
+const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
+metalnessTexture.colorSpace = THREE.SRGBColorSpace
+const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+roughnessTexture.colorSpace = THREE.SRGBColorSpace
 
 /**
  * Base
@@ -19,7 +50,7 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ map: texture })
+const material = new THREE.MeshBasicMaterial({ map: colorTexture })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
