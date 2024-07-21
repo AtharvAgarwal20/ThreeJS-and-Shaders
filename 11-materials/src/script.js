@@ -11,23 +11,38 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Textures
-const textureLoader = new THREE.TextureLoader()
+const loadingManager = new THREE.LoadingManager()
 
-const doorColorTexture = textureLoader.load('../static/textures/door/color.jpg')
-const doorAlphaTexture = textureLoader.load('../static/textures/door/alpha.jpg')
-const doorAmbientOcclusionTexture = textureLoader.load('../static/textures/door/ambientOcclusion.jpg')
-const doorHeightTexture = textureLoader.load('../static/textures/door/height.jpg')
-const doorNormalTexture = textureLoader.load('../static/textures/door/normal.jpg')
-const doorMetalnessTexture = textureLoader.load('../static/textures/door/metalness.jpg')
-const doorRoughnessTexture = textureLoader.load('../static/textures/door/roughness.jpg')
-const matcapTexture = textureLoader.load('../static/textures/matcaps/1.png')
-const gradientTexture = textureLoader.load('../static/textures/gradients/3.jpg')
+loadingManager.onStart = () => {
+    console.log("Started loading")
+}
+
+loadingManager.onError = (err) => {
+    console.log(err)
+}
+
+loadingManager.onLoad = () => {
+    console.log("textures loaded")
+}
+
+const textureLoader = new THREE.TextureLoader(loadingManager)
+
+const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
+const doorAlphaTexture = textureLoader.load('/textures/door/alpha.jpg')
+const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
+const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
+const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
+const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
+const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
 
 doorColorTexture.colorSpace = THREE.SRGBColorSpace
 matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 // Object
 const material = new THREE.MeshBasicMaterial({ map: doorColorTexture })
+
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material)
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material)
 const torus = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.2, 16, 32), material)
