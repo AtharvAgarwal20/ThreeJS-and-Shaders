@@ -37,6 +37,13 @@ metalnessTexture.colorSpace = THREE.SRGBColorSpace
 const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
 roughnessTexture.colorSpace = THREE.SRGBColorSpace
 
+colorTexture.repeat.x = 2
+colorTexture.repeat.y = 3
+colorTexture.wrapS = THREE.RepeatWrapping
+colorTexture.wrapT = THREE.RepeatWrapping
+// colorTexture.wrapS = THREE.MirroredRepeatWrapping
+// colorTexture.wrapT = THREE.MirroredRepeatWrapping
+
 /**
  * Base
  */
