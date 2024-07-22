@@ -17,6 +17,42 @@ const scene = new THREE.Scene()
 /**
  * Lights
  */
+const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+gui.add(ambientLight, 'intensity').min(0).max(3).step(0.001).name("Ambient Light Intensity")
+scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight(0x00fffc, 0.9)
+gui.add(directionalLight, 'intensity').min(0).max(3).step(0.001).name("Directional Light Intensity")
+directionalLight.position.set(1, 0.25, 0)
+scene.add(directionalLight)
+
+const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.9)
+gui.add(hemisphereLight, 'intensity').min(0).max(3).step(0.001).name("Hemisphere Light Intensity")
+scene.add(hemisphereLight)
+
+const pointLight = new THREE.PointLight(0xff900, 1.5, 2)
+gui.add(pointLight, 'intensity').min(0).max(5).step(0.001).name("Point Light Intensity")
+gui.add(pointLight, 'distance').min(1).max(10).step(0.1).name("Point Light Distance")
+pointLight.position.set(1, -0.5, 1)
+scene.add(pointLight)
+
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 6, 1, 1)
+gui.add(rectAreaLight, 'intensity').min(0).max(18).step(0.1).name("RectArea Light Intensity")
+gui.add(rectAreaLight, 'width').min(0).max(10).step(0.1).name("RectArea Light Width")
+gui.add(rectAreaLight, 'height').min(0).max(10).step(0.1).name("RectArea Light Height")
+rectAreaLight.position.set(-1.5, 0, 1.5)
+rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0))
+scene.add(rectAreaLight)
+
+const spotLight = new THREE.SpotLight(0x78ff00, 4.5, 10, Math.PI * 0.1, 0.25, 1)
+gui.add(spotLight, 'intensity').min(0).max(18).step(0.1).name("Spot Light Intensity")
+gui.add(spotLight, 'penumbra').min(0).max(1).step(0.001).name("Spot Light Penumbra")
+gui.add(spotLight, 'angle').min(0).max(Math.PI).step(0.00001).name("Spot Light Angle")
+spotLight.position.set(0, 2, 3)
+scene.add(spotLight)
+
+spotLight.target.position.x = -1
+scene.add(spotLight.target)
 
 /**
  * Objects
