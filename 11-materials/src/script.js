@@ -1,5 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import GUI from 'lil-gui'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+
+const gui = new GUI()
 
 /**
  * Base
@@ -35,14 +39,59 @@ const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
 const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
 const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
 const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
-const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
+const gradientTexture = textureLoader.load('/textures/gradients/5.jpg')
 
 doorColorTexture.colorSpace = THREE.SRGBColorSpace
 matcapTexture.colorSpace = THREE.SRGBColorSpace
 
-// Object
-const material = new THREE.MeshBasicMaterial({ map: doorColorTexture })
+// GUI
+const materialTweaks = gui.addFolder('Material Properties')
 
+// // MeshBasicMaterial
+// const material = new THREE.MeshBasicMaterial()
+// material.map = doorColorTexture
+// material.color = new THREE.Color(0xff0000)
+// material.wireframe = true
+// material.transparent = true
+// material.opacity = 0.5
+// material.alphaMap = doorAlphaTexture
+// material.side = THREE.DoubleSide
+
+// // MeshNormalMaterial
+// const material = new THREE.MeshNormalMaterial()
+// material.flatShading = true
+
+// // MeshMatcapMaterial
+// const material = new THREE.MeshMatcapMaterial()
+// material.matcap = matcapTexture
+
+// // MeshDepthMaterial
+// const material = new THREE.MeshDepthMaterial()
+
+// // MeshLambertMaterial
+// const material = new THREE.MeshLambertMaterial()
+
+// // MeshPhongMaterial
+// const material = new THREE.MeshPhongMaterial()
+// material.shininess = 100
+// material.specular = new THREE.Color(0x1188ff)
+
+// // MeshToonMaterial
+// const material = new THREE.MeshToonMaterial()
+// gradientTexture.magFilter = THREE.NearestFilter
+// gradientTexture.minFilter = THREE.NearestFilter
+// gradientTexture.generateMipmaps = false
+// material.gradientMap = gradientTexture
+
+// MeshStandardMaterial
+const material = new THREE.MeshStandardMaterial()
+material.metalness = 0.7
+material.roughness = 0.2
+materialTweaks.add(material, 'metalness').min(0).max(1).step(0.0001)
+materialTweaks.add(material, 'roughness').min(0).max(1).step(0.0001)
+
+
+// Object
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material)
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material)
 const torus = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.2, 16, 32), material)
@@ -51,6 +100,24 @@ sphere.position.x = -1.5
 torus.position.x = 1.5
 
 scene.add(sphere, torus, plane)
+
+// // Lights
+// const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+// scene.add(ambientLight)
+
+// const pointLight = new THREE.PointLight(0xffffff, 30)
+// pointLight.position.x = 2
+// pointLight.position.y = 3
+// pointLight.position.z = 4
+// scene.add(pointLight)
+
+// Environment Map
+const rgbeLoader = new RGBELoader()
+rgbeLoader.load('/textures/environmentMap/2k.hdr', (environmentMap) => {
+    environmentMap.mapping = THREE.EquirectangularReflectionMapping
+    scene.background = environmentMap
+    scene.environment = environmentMap
+})
 
 /**
  * Sizes
