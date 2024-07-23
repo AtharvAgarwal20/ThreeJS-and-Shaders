@@ -44,26 +44,49 @@ const walls = new THREE.Mesh(
     new THREE.BoxGeometry(houseMeasurements.width, houseMeasurements.height, houseMeasurements.depth),
     new THREE.MeshStandardMaterial()
 )
-house.add(walls)
 walls.position.y += houseMeasurements.height / 2
+house.add(walls)
 
 // Roof
 const roof = new THREE.Mesh(
     new THREE.ConeGeometry(houseMeasurements.width, houseMeasurements.roofHeight, 4),
     new THREE.MeshStandardMaterial()
 )
-house.add(roof)
 roof.position.y += houseMeasurements.height + (houseMeasurements.roofHeight / 2)
 roof.rotation.y += Math.PI / 4
+house.add(roof)
 
 // Door
 const door = new THREE.Mesh(
     new THREE.PlaneGeometry(houseMeasurements.doorHeight, houseMeasurements.doorWidth),
     new THREE.MeshStandardMaterial()
 )
-house.add(door)
 door.position.z += houseMeasurements.depth / 2 + 0.001
 door.position.y += houseMeasurements.doorHeight / 2
+house.add(door)
+
+// Bushes
+const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
+const bushMaterial = new THREE.MeshStandardMaterial()
+
+const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush1.scale.set(0.5, 0.5, 0.5)
+bush1.position.set(0.8, 0.2, 2.2)
+
+const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush2.scale.set(0.25, 0.25, 0.25)
+bush2.position.set(1.4, 0.1, 2.1)
+
+const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush3.scale.set(0.4, 0.4, 0.4)
+bush3.position.set(-0.8, 0.1, 2.2)
+
+const bush4 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush4.scale.set(0.15, 0.15, 0.15)
+bush4.position.set(-1, 0.05, 2.6)
+
+
+house.add(bush1, bush2, bush3, bush4)
 
 
 
