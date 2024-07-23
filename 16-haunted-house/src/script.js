@@ -307,9 +307,36 @@ const doorLight = new THREE.PointLight(debugObject.doorLightColor, 5)
 gui.addColor(debugObject, 'doorLightColor').name("Door Light Color").onChange(() => {
     doorLight.color.set(debugObject.doorLightColor)
 })
+gui.add(doorLight, 'intensity').min(0).max(10).step(0.001).name("Door Light Intensity")
 doorLight.position.set(0, 2.2, 2.5)
 
 house.add(doorLight)
+
+// Ghosts
+debugObject.ghost1Color = 0x8800ff
+debugObject.ghost2Color = 0xff0088
+debugObject.ghost3Color = 0xff0000
+
+const ghost1 = new THREE.PointLight(debugObject.ghost1Color, 6)
+gui.addColor(debugObject, 'ghost1Color').name("Ghost 1 Color").onChange(() => {
+    ghost1.color.set(debugObject.ghost1Color)
+})
+gui.add(ghost1, 'intensity').min(0).max(10).step(0.001).name("Ghost 1 Intensity")
+
+const ghost2 = new THREE.PointLight(debugObject.ghost2Color, 6)
+gui.addColor(debugObject, 'ghost2Color').name("Ghost 2 Color").onChange(() => {
+    ghost2.color.set(debugObject.ghost2Color)
+})
+gui.add(ghost2, 'intensity').min(0).max(10).step(0.001).name("Ghost 2 Intensity")
+
+const ghost3 = new THREE.PointLight(debugObject.ghost3Color, 6)
+gui.addColor(debugObject, 'ghost3Color').name("Ghost 3 Color").onChange(() => {
+    ghost3.color.set(debugObject.ghost3Color)
+})
+gui.add(ghost3, 'intensity').min(0).max(10).step(0.001).name("Ghost 3 Intensity")
+
+scene.add(ghost1, ghost2, ghost3)
+
 
 /**
  * Sizes
