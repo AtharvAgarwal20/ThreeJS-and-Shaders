@@ -4,10 +4,10 @@ import GUI from 'lil-gui'
 
 // Textures
 const textureLoader = new THREE.TextureLoader()
-const bakedShadow = textureLoader.load('/textures/bakedShadow.jpg')
+const bakedShadow = textureLoader.load('./textures/bakedShadow.jpg')
 bakedShadow.colorSpace = THREE.SRGBColorSpace
 
-const simpleShadow = textureLoader.load('/textures/simpleShadow.jpg')
+const simpleShadow = textureLoader.load('./textures/simpleShadow.jpg')
 
 
 /**

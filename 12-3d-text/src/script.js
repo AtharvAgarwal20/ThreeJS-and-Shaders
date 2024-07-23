@@ -24,7 +24,7 @@ scene.add(axesHelper)
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('/textures/matcaps/5.png')
+const matcapTexture = textureLoader.load('./textures/matcaps/5.png')
 matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 // Fonts

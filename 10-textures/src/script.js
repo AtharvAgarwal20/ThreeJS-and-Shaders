@@ -22,19 +22,19 @@ loadingManager.onError = (error) => {
 }
 
 const textureLoader = new THREE.TextureLoader(loadingManager)
-const colorTexture = textureLoader.load('/textures/minecraft.png')
+const colorTexture = textureLoader.load('./textures/minecraft.png')
 colorTexture.colorSpace = THREE.SRGBColorSpace
-const alphaTexture = textureLoader.load('/textures/door/alpha.jpg')
+const alphaTexture = textureLoader.load('./textures/door/alpha.jpg')
 alphaTexture.colorSpace = THREE.SRGBColorSpace
-const heightTexture = textureLoader.load('/textures/door/height.jpg')
+const heightTexture = textureLoader.load('./textures/door/height.jpg')
 heightTexture.colorSpace = THREE.SRGBColorSpace
-const normalTexture = textureLoader.load('/textures/door/normal.jpg')
+const normalTexture = textureLoader.load('./textures/door/normal.jpg')
 normalTexture.colorSpace = THREE.SRGBColorSpace
-const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+const ambientOcclusionTexture = textureLoader.load('./textures/door/ambientOcclusion.jpg')
 ambientOcclusionTexture.colorSpace = THREE.SRGBColorSpace
-const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
+const metalnessTexture = textureLoader.load('./textures/door/metalness.jpg')
 metalnessTexture.colorSpace = THREE.SRGBColorSpace
-const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+const roughnessTexture = textureLoader.load('./textures/door/roughness.jpg')
 roughnessTexture.colorSpace = THREE.SRGBColorSpace
 
 // colorTexture.repeat.x = 2
