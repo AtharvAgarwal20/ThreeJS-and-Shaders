@@ -41,6 +41,23 @@ const floorDisplacementTexture = textureLoader.load('./floor/coast_sand_rocks_02
 
 floorColorTexture.colorSpace = THREE.SRGBColorSpace
 
+floorColorTexture.repeat.set(8, 8)
+floorColorTexture.wrapS = THREE.RepeatWrapping
+floorColorTexture.wrapT = THREE.RepeatWrapping
+
+floorARMTexture.repeat.set(8, 8)
+floorARMTexture.wrapS = THREE.RepeatWrapping
+floorARMTexture.wrapT = THREE.RepeatWrapping
+
+floorNormalTexture.repeat.set(8, 8)
+floorNormalTexture.wrapS = THREE.RepeatWrapping
+floorNormalTexture.wrapT = THREE.RepeatWrapping
+
+floorDisplacementTexture.repeat.set(8, 8)
+floorDisplacementTexture.wrapS = THREE.RepeatWrapping
+floorDisplacementTexture.wrapT = THREE.RepeatWrapping
+
+
 /**
  * House
  */
@@ -55,14 +72,25 @@ const houseMeasurements = {
 
 // Floor
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20),
+    new THREE.PlaneGeometry(20, 20, 100, 100),
     new THREE.MeshStandardMaterial({
         transparent: true,
-        alphaMap: floorAlphaTexture
+        alphaMap: floorAlphaTexture,
+        map: floorColorTexture,
+        aoMap: floorARMTexture,
+        roughnessMap: floorARMTexture,
+        metalnessMap: floorARMTexture,
+        normalMap: floorNormalTexture,
+        displacementMap: floorDisplacementTexture,
+        displacementScale: 0.3,
+        displacementBias: -0.2
     })
 )
 floor.rotation.x = - Math.PI / 2
 scene.add(floor)
+
+gui.add(floor.material, 'displacementScale').min(0).max(1).step(0.001).name("floorDisplacementScale")
+gui.add(floor.material, 'displacementBias').min(-1).max(1).step(0.001).name("floorDisplacementBias")
 
 // House Group
 const house = new THREE.Group()
