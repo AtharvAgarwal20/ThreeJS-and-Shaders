@@ -57,6 +57,13 @@ floorDisplacementTexture.repeat.set(8, 8)
 floorDisplacementTexture.wrapS = THREE.RepeatWrapping
 floorDisplacementTexture.wrapT = THREE.RepeatWrapping
 
+// Walls
+const wallsColorTexture = textureLoader.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_diff_1k.jpg')
+const wallsARMTexture = textureLoader.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_arm_1k.jpg')
+const wallsNormalTexture = textureLoader.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_nor_gl_1k.jpg')
+
+wallsColorTexture.colorSpace = THREE.SRGBColorSpace
+
 
 /**
  * House
