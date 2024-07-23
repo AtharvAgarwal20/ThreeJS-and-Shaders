@@ -106,7 +106,13 @@ scene.add(house)
 // Walls
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(houseMeasurements.width, houseMeasurements.height, houseMeasurements.depth),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map: wallsColorTexture,
+        aoMap: wallsARMTexture,
+        roughnessMap: wallsARMTexture,
+        metalnessMap: wallsARMTexture,
+        normalMap: wallsNormalTexture
+    })
 )
 walls.position.y += houseMeasurements.height / 2
 house.add(walls)
