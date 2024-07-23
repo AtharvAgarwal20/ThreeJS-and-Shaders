@@ -17,16 +17,54 @@ const scene = new THREE.Scene()
 /**
  * Textures
  */
-const textureLoader = new THREE.TextureLoader()
+const loadingManager = new THREE.LoadingManager()
+loadingManager.onStart = () => {
+    console.log("Started loading textures")
+}
+loadingManager.onError = (err) => {
+    console.log("Error in loading textures")
+    console.log(err)
+}
+loadingManager.onLoad = () => {
+    console.log("Finished loading textures")
+}
 
-/**
- * Test cube
- */
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial()
-)
-scene.add(cube)
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const particleTexture = textureLoader.load('./textures/particles/2.png')
+
+// Particles
+// Geometry
+const particlesGeometry = new THREE.BufferGeometry()
+const count = 20000
+
+const positions = new Float32Array(count * 3)
+const colors = new Float32Array(count * 3)
+
+for (let i = 0; i < count * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 5
+    colors[i] = (Math.random())
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+
+// Material
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.02,
+    sizeAttenuation: true,
+    // color: '#ff88cc',
+    transparent: true,
+    alphaMap: particleTexture,
+    // alphaTest: 0.001,
+    // depthTest: false,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexColors: true
+})
+
+// Points
+const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+scene.add(particles)
 
 /**
  * Sizes
