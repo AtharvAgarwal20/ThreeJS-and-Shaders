@@ -64,6 +64,34 @@ const wallsNormalTexture = textureLoader.load('./wall/castle_brick_broken_06_1k/
 
 wallsColorTexture.colorSpace = THREE.SRGBColorSpace
 
+// Roof
+const roofColorTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_diff_1k.jpg')
+const roofARMTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_arm_1k.jpg')
+const roofNormalTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.jpg')
+
+roofColorTexture.colorSpace = THREE.SRGBColorSpace
+
+roofColorTexture.repeat.set(3, 1)
+roofColorTexture.wrapS = THREE.RepeatWrapping
+roofARMTexture.repeat.set(3, 1)
+roofARMTexture.wrapS = THREE.RepeatWrapping
+roofNormalTexture.repeat.set(3, 1)
+roofNormalTexture.wrapS = THREE.RepeatWrapping
+
+// Bush
+const bushColorTexture = textureLoader.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.jpg')
+const bushARMTexture = textureLoader.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.jpg')
+const bushNormalTexture = textureLoader.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.jpg')
+
+bushColorTexture.colorSpace = THREE.SRGBColorSpace
+
+bushColorTexture.repeat.set(2, 1)
+bushColorTexture.wrapS = THREE.RepeatWrapping
+bushARMTexture.repeat.set(2, 1)
+bushARMTexture.wrapS = THREE.RepeatWrapping
+bushNormalTexture.repeat.set(2, 1)
+bushNormalTexture.wrapS = THREE.RepeatWrapping
+
 
 /**
  * House
@@ -120,7 +148,13 @@ house.add(walls)
 // Roof
 const roof = new THREE.Mesh(
     new THREE.ConeGeometry(houseMeasurements.width, houseMeasurements.roofHeight, 4),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map: roofColorTexture,
+        aoMap: roofARMTexture,
+        roughnessMap: roofARMTexture,
+        metalnessMap: roofARMTexture,
+        normalMap: roofNormalTexture
+    })
 )
 roof.position.y += houseMeasurements.height + (houseMeasurements.roofHeight / 2)
 roof.rotation.y += Math.PI / 4
@@ -137,23 +171,34 @@ house.add(door)
 
 // Bushes
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
-const bushMaterial = new THREE.MeshStandardMaterial()
+const bushMaterial = new THREE.MeshStandardMaterial({
+    color: 0xccffcc,
+    map: bushColorTexture,
+    aoMap: bushARMTexture,
+    roughnessMap: bushARMTexture,
+    metalnessMap: bushARMTexture,
+    normalMap: bushNormalTexture
+})
 
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush1.scale.set(0.5, 0.5, 0.5)
 bush1.position.set(0.8, 0.2, 2.2)
+bush1.rotation.x = -0.75
 
 const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush2.scale.set(0.25, 0.25, 0.25)
 bush2.position.set(1.4, 0.1, 2.1)
+bush2.rotation.x = -0.75
 
 const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush3.scale.set(0.4, 0.4, 0.4)
 bush3.position.set(-0.8, 0.1, 2.2)
+bush3.rotation.x = -0.75
 
 const bush4 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush4.scale.set(0.15, 0.15, 0.15)
 bush4.position.set(-1, 0.05, 2.6)
+bush4.rotation.x = -0.75
 
 house.add(bush1, bush2, bush3, bush4)
 
