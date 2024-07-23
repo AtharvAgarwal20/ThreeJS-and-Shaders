@@ -18,12 +18,54 @@ const scene = new THREE.Scene()
 /**
  * House
  */
-// Temporary sphere
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 32, 32),
-    new THREE.MeshStandardMaterial({ roughness: 0.7 })
+const houseMeasurements = {
+    width: 4,
+    height: 2.5,
+    depth: 4,
+    roofHeight: 1.5,
+    doorHeight: 2.2,
+    doorWidth: 2.2
+}
+
+// Floor
+const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.MeshStandardMaterial()
 )
-scene.add(sphere)
+floor.rotation.x = - Math.PI / 2
+scene.add(floor)
+
+// House Group
+const house = new THREE.Group()
+scene.add(house)
+
+// Walls
+const walls = new THREE.Mesh(
+    new THREE.BoxGeometry(houseMeasurements.width, houseMeasurements.height, houseMeasurements.depth),
+    new THREE.MeshStandardMaterial()
+)
+house.add(walls)
+walls.position.y += houseMeasurements.height / 2
+
+// Roof
+const roof = new THREE.Mesh(
+    new THREE.ConeGeometry(houseMeasurements.width, houseMeasurements.roofHeight, 4),
+    new THREE.MeshStandardMaterial()
+)
+house.add(roof)
+roof.position.y += houseMeasurements.height + (houseMeasurements.roofHeight / 2)
+roof.rotation.y += Math.PI / 4
+
+// Door
+const door = new THREE.Mesh(
+    new THREE.PlaneGeometry(houseMeasurements.doorHeight, houseMeasurements.doorWidth),
+    new THREE.MeshStandardMaterial()
+)
+house.add(door)
+door.position.z += houseMeasurements.depth / 2 + 0.001
+door.position.y += houseMeasurements.doorHeight / 2
+
+
 
 /**
  * Lights
