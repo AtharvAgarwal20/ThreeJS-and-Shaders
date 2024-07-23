@@ -8,6 +8,7 @@ import GUI from 'lil-gui'
  */
 // Debug
 const gui = new GUI()
+const debugObject = {}
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -272,13 +273,43 @@ for (let i = 0; i < 30; i++) {
  * Lights
  */
 // Ambient light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0.5)
+debugObject.ambientLightColor = 0x86CDFF
+
+const ambientLight = new THREE.AmbientLight(debugObject.ambientLightColor, 0.275)
+
+gui.addColor(debugObject, 'ambientLightColor').name("Ambient Light Color").onChange(() => {
+    ambientLight.color.set(debugObject.ambientLightColor)
+})
+gui.add(ambientLight, 'intensity').min(0).max(2).step(0.001).name("Ambient Light Intensity")
+
 scene.add(ambientLight)
 
 // Directional light
-const directionalLight = new THREE.DirectionalLight('#ffffff', 1.5)
+debugObject.directionalLightColor = 0x86CDFF
+
+const directionalLight = new THREE.DirectionalLight('#86cdff', 1)
 directionalLight.position.set(3, 2, -8)
+
+gui.addColor(debugObject, 'directionalLightColor').name("Directional Light Color").onChange(() => {
+    directionalLight.color.set(debugObject.directionalLightColor)
+})
+gui.add(directionalLight, 'intensity').min(0).max(2).step(0.001).name("Directional Light Intensity")
+gui.add(directionalLight.position, 'x').min(-10).max(10).step(0.01).name("Directional Light x")
+gui.add(directionalLight.position, 'y').min(-10).max(10).step(0.01).name("Directional Light y")
+gui.add(directionalLight.position, 'z').min(-10).max(10).step(0.01).name("Directional Light z")
+
 scene.add(directionalLight)
+
+// Door Light
+debugObject.doorLightColor = 0xff7d46
+
+const doorLight = new THREE.PointLight(debugObject.doorLightColor, 5)
+gui.addColor(debugObject, 'doorLightColor').name("Door Light Color").onChange(() => {
+    doorLight.color.set(debugObject.doorLightColor)
+})
+doorLight.position.set(0, 2.2, 2.5)
+
+house.add(doorLight)
 
 /**
  * Sizes
