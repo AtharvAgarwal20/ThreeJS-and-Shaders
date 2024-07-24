@@ -10,8 +10,9 @@ const parameters = {
     materialColor: '#ffeded'
 }
 
-gui
-    .addColor(parameters, 'materialColor')
+gui.addColor(parameters, 'materialColor').onChange(() => {
+    material.color.set(parameters.materialColor)
+})
 
 /**
  * Base
@@ -41,6 +42,17 @@ const torusKnot = new THREE.Mesh(
     material
 )
 scene.add(torus, cone, torusKnot)
+
+/**
+ *  Light
+ */
+const directionalLight = new THREE.DirectionalLight(0xffffff, 3)
+directionalLight.position.set(1, 1, 0)
+gui.add(directionalLight, 'intensity').min(0).max(10).step(0.001)
+scene.add(directionalLight)
+
+const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 0.2)
+scene.add(directionalLightHelper)
 
 /**
  * Sizes
