@@ -40,8 +40,10 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
- *  Torus
+ *  Meshes
  */
+const objectDistance = 4
+
 const material = new THREE.MeshToonMaterial({
     color: parameters.materialColor,
     gradientMap: gradientTexture
@@ -58,6 +60,11 @@ const torusKnot = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
     material
 )
+
+torus.position.y = - objectDistance * 0
+cone.position.y = - objectDistance * 1
+torusKnot.position.y = - objectDistance * 2
+
 scene.add(torus, cone, torusKnot)
 
 /**
