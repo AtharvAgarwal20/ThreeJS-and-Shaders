@@ -77,9 +77,6 @@ directionalLight.position.set(1, 1, 0)
 gui.add(directionalLight, 'intensity').min(0).max(10).step(0.001)
 scene.add(directionalLight)
 
-const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 0.2)
-scene.add(directionalLightHelper)
-
 /**
  * Sizes
  */
@@ -151,9 +148,12 @@ window.addEventListener('mousemove', (event) => {
  * Animate
  */
 const clock = new THREE.Clock()
+let previousTime = 0
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
 
     // Animate camera
     camera.position.y = -scrollY / sizes.height * objectDistance
@@ -161,8 +161,8 @@ const tick = () => {
     const parallaxX = cursor.x
     const parallaxY = - cursor.y
 
-    cameraGroup.position.x = parallaxX
-    cameraGroup.position.y = parallaxY
+    cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
+    cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime
 
     // Animate meshes
     for (let mesh of sectionMeshes) {
