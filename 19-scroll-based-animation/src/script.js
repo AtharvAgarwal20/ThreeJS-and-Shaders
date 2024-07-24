@@ -67,6 +67,8 @@ torusKnot.position.y = - objectDistance * 2
 
 scene.add(torus, cone, torusKnot)
 
+const sectionMeshes = [torus, cone, torusKnot]
+
 /**
  *  Light
  */
@@ -125,6 +127,12 @@ const clock = new THREE.Clock()
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+
+    // Animate meshes
+    for (let mesh of sectionMeshes) {
+        mesh.rotation.x = elapsedTime / 10
+        mesh.rotation.y = elapsedTime / 9
+    }
 
     // Render
     renderer.render(scene, camera)
