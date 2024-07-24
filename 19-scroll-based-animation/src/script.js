@@ -15,6 +15,22 @@ gui.addColor(parameters, 'materialColor').onChange(() => {
 })
 
 /**
+ *  Textures
+ */
+const loadingManager = new THREE.LoadingManager()
+loadingManager.onError = (err) => {
+    console.log(err)
+}
+loadingManager.onLoad = () => {
+    console.log('loaded')
+}
+
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const gradientTexture = textureLoader.load('./textures/gradients/5.jpg')
+gradientTexture.minFilter = THREE.NearestFilter
+gradientTexture.magFilter = THREE.NearestFilter
+
+/**
  * Base
  */
 // Canvas
@@ -27,7 +43,8 @@ const scene = new THREE.Scene()
  *  Torus
  */
 const material = new THREE.MeshToonMaterial({
-    color: parameters.materialColor
+    color: parameters.materialColor,
+    gradientMap: gradientTexture
 })
 const torus = new THREE.Mesh(
     new THREE.TorusGeometry(1, 0.4, 16, 60),
