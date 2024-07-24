@@ -106,9 +106,11 @@ window.addEventListener('resize', () => {
  * Camera
  */
 // Base camera
+const cameraGroup = new THREE.Group()
+scene.add(cameraGroup)
 const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100)
 camera.position.z = 6
-scene.add(camera)
+cameraGroup.add(camera)
 
 /**
  * Renderer
@@ -121,6 +123,31 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
+ *  Scroll
+ */
+let scrollY = window.scrollY
+
+window.addEventListener('scroll', () => {
+    scrollY = window.scrollY
+})
+
+/**
+ *  Cursor
+ */
+let cursor = {
+    x: 0,
+    y: 0
+}
+
+window.addEventListener('mousemove', (event) => {
+    cursor = {
+        x: event.clientX / sizes.width - 0.5,
+        y: event.clientY / sizes.height - 0.5
+    }
+})
+
+
+/**
  * Animate
  */
 const clock = new THREE.Clock()
@@ -128,11 +155,24 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
+    // Animate camera
+    camera.position.y = -scrollY / sizes.height * objectDistance
+
+    const parallaxX = cursor.x
+    const parallaxY = - cursor.y
+
+    cameraGroup.position.x = parallaxX
+    cameraGroup.position.y = parallaxY
+
     // Animate meshes
     for (let mesh of sectionMeshes) {
         mesh.rotation.x = elapsedTime / 10
         mesh.rotation.y = elapsedTime / 9
     }
+
+    torus.position.x = 2
+    cone.position.x = -2
+    torusKnot.position.x = 2
 
     // Render
     renderer.render(scene, camera)
