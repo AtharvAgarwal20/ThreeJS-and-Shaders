@@ -5,7 +5,8 @@
 
 html,
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
+    background-color: #1E1A20;
 }
 
 .webgl {
