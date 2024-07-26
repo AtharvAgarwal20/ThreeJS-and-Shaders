@@ -196,6 +196,38 @@ debugObject.createSphere = () => {
 }
 gui.add(debugObject, 'createSphere')
 
+
+const boxGeometry = new THREE.BoxGeometry(1, 1, 1)
+
+const createBoxes = (width = 1, height = 1, depth = 1, mass = 1, position) => {
+    // ThreeJS
+    const mesh = new THREE.Mesh(
+        boxGeometry,
+        sphereMaterial
+    )
+    mesh.scale.set(width, height, depth)
+    mesh.castShadow = true
+    mesh.position.copy(position)
+    scene.add(mesh)
+
+    // CannonJS
+    const shape = new CANNON.Box(new CANNON.Vec3(width / 2, height / 2, depth / 2))
+    const body = new CANNON.Body(
+        mass,
+        position,
+        shape
+    )
+    body.position.copy(position)
+    world.addBody(body)
+
+    objectsToUpdate.push({
+        mesh,
+        body
+    })
+}
+
+createBoxes(1, 1, 1, 1, { x: 0, y: 3, z: 0 })
+
 /**
  * Animate
  */
