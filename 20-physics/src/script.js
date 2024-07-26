@@ -5,15 +5,29 @@ import CANNON from 'cannon';
 
 /**
  * Debug
- */
+*/
 const gui = new GUI()
 const debugObject = {}
 
 /**
  * Base
- */
+*/
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
+
+// Sounds
+const hitSound = new Audio('./sounds/hit.mp3')
+
+const playHitSound = (collision) => {
+    const impactStrength = collision.contact.getImpactVelocityAlongNormal()
+    // console.log(collision.contact.getImpactVelocityAlongNormal())
+    if (impactStrength > 1.5) {
+        hitSound.volume = Math.random()
+        hitSound.currentTime = 0
+        hitSound.play()
+    }
+}
+
 
 // Scene
 const scene = new THREE.Scene()
@@ -224,17 +238,14 @@ const createBox = (width, height, depth, position) => {
         material: defaultMaterial
     })
     body.position.copy(position)
+    body.addEventListener('collide', playHitSound)
     world.addBody(body)
 
     // Save in objects
     objectsToUpdate.push({ mesh, body })
 }
 
-let boxCount = 0
-
 debugObject.createBox = () => {
-    boxCount++
-    console.log(boxCount)
     createBox(
         Math.random(),
         Math.random(),
