@@ -193,6 +193,7 @@ const createSphere = (radius, position, mass = 1) => {
         shape
     })
     body.position.copy(position)
+    body.addEventListener('collide', playHitSound)
     world.addBody(body)
 
     objectsToUpdate.push({
@@ -258,6 +259,21 @@ debugObject.createBox = () => {
     )
 }
 gui.add(debugObject, 'createBox')
+
+// Reset
+debugObject.reset = () => {
+    for (let object of objectsToUpdate) {
+        // Remove Physics Body
+        object.body.removeEventListener('collide', playHitSound)
+        world.removeBody(object.body)
+
+        // Remove ThreeJS Mesh
+        scene.remove(object.mesh)
+    }
+    // Empty the array
+    objectsToUpdate.splice(0, objectsToUpdate.length)
+}
+gui.add(debugObject, 'reset')
 
 /**
  * Animate
