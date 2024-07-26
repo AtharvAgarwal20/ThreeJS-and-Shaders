@@ -55,12 +55,29 @@ gltfLoader.setDRACOLoader(dracoLoader)
 //     }
 // )
 
+// gltfLoader.load(
+//     './models/Duck/glTF-Draco/Duck.gltf',
+//     (gltf) => {
+//         console.log('success')
+//         console.log(gltf)
+//         scene.add(gltf.scene.children[0])
+//     }
+// )
+
+let mixer = null;
+
 gltfLoader.load(
-    './models/Duck/glTF-Draco/Duck.gltf',
+    './models/Fox/glTF/Fox.gltf',
     (gltf) => {
         console.log('success')
         console.log(gltf)
-        scene.add(gltf.scene.children[0])
+        mixer = new THREE.AnimationMixer(gltf.scene)
+        const action = mixer.clipAction(gltf.animations[2])
+
+        action.play()
+
+        gltf.scene.scale.setScalar(0.015)   // gltf.scene.scale.set(0.015,0.015,0.015)
+        scene.add(gltf.scene)
     }
 )
 
@@ -152,6 +169,11 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - previousTime
     previousTime = elapsedTime
+
+    // Update mixer
+    if (mixer !== null) {
+        mixer.update(deltaTime)
+    }
 
     // Update controls
     controls.update()
