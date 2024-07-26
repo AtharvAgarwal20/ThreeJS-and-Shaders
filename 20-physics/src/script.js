@@ -151,16 +151,20 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  */
 const objectsToUpdate = []
 
+const sphereGeometry = new THREE.SphereGeometry(1, 20, 20)
+const sphereMaterial = new THREE.MeshStandardMaterial({
+    metalness: 0.3,
+    roughness: 0.4,
+    envMap: environmentMapTexture
+})
+
 const createSphere = (radius, position, mass = 1) => {
     // Three.js
     const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, 20, 20),
-        new THREE.MeshStandardMaterial({
-            metalness: 0.3,
-            roughness: 0.4,
-            envMap: environmentMapTexture
-        })
+        sphereGeometry,
+        sphereMaterial
     )
+    mesh.scale.setScalar(radius)
     mesh.castShadow = true
     mesh.position.copy(position)
     scene.add(mesh)
