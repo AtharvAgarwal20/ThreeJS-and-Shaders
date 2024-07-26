@@ -157,6 +157,12 @@ const tick = () => {
     // Update physics world
     world.step(1 / 60, deltaTime, 3)
 
+    // sphere.position.x = sphereBody.position.x
+    // sphere.position.y = sphereBody.position.y
+    // sphere.position.z = sphereBody.position.z
+
+    sphere.position.copy(sphereBody.position)
+
     // Update controls
     controls.update()
 
