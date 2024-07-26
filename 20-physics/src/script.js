@@ -181,9 +181,16 @@ const createSphere = (radius, position, mass = 1) => {
     })
 }
 
-createSphere(0.5, new CANNON.Vec3(0, 3, 0))
-createSphere(0.5, new CANNON.Vec3(3, 3, 0))
-createSphere(0.5, new CANNON.Vec3(0, 3, 3))
+debugObject.createSphere = () => {
+    createSphere(
+        Math.random() * 0.5,
+        {
+            x: (Math.random() - 0.5) * 4,
+            y: 3,
+            z: (Math.random() - 0.5) * 4
+        })
+}
+gui.add(debugObject, 'createSphere')
 
 /**
  * Animate
