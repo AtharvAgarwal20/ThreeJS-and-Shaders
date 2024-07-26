@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 
 /**
  * Base
@@ -18,6 +19,7 @@ const scene = new THREE.Scene()
 /**
  *  Models
  */
+const dracoLoader = new DRACOLoader()
 const gltfLoader = new GLTFLoader()
 
 // gltfLoader.load(
@@ -28,24 +30,34 @@ const gltfLoader = new GLTFLoader()
 //         scene.add(gltf.scene.children[0])
 //     }
 // )
-gltfLoader.load(
-    './models/FlightHelmet/glTF/FlightHelmet.gltf',
+
+// gltfLoader.load(
+//     './models/FlightHelmet/glTF/FlightHelmet.gltf',
+//     (gltf) => {
+//         console.log('success')
+//         console.log(gltf)
+//         // scene.add(gltf.scene.children[0])
+
+//         // while (gltf.scene.children.length) {
+//         //     scene.add(gltf.scene.children[0])
+//         // }
+
+//         // const children = [...gltf.scene.children]
+
+//         // for (let child of children) {
+//         //     scene.add(child)
+//         // }
+
+//         scene.add(gltf.scene)
+//     }
+// )
+
+dracoLoader.load(
+    './models/Duck/glTF-Draco/Duck.gltf',
     (gltf) => {
         console.log('success')
         console.log(gltf)
-        // scene.add(gltf.scene.children[0])
-
-        // while (gltf.scene.children.length) {
-        //     scene.add(gltf.scene.children[0])
-        // }
-
-        // const children = [...gltf.scene.children]
-
-        // for (let child of children) {
-        //     scene.add(child)
-        // }
-
-        scene.add(gltf.scene)
+        scene.add(gltf.scene.children[0])
     }
 )
 
