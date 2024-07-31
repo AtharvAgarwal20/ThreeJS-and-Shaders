@@ -80,6 +80,16 @@ window.addEventListener('resize', () => {
 })
 
 /**
+ *  Mouse
+ */
+const mouse = new THREE.Vector2()
+
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX / sizes.width * 2 - 1
+    mouse.y = - (event.clientY / sizes.height * 2 - 1)
+})
+
+/**
  * Camera
  */
 // Base camera
@@ -113,24 +123,25 @@ const tick = () => {
     object2.position.y = Math.sin(elapsedTime * 0.8) * 1.5
     object3.position.y = Math.sin(elapsedTime * 1.4) * 1.5
 
-    const raycasterOrigin = new THREE.Vector3(-10, 0, 0)
-    const raycasterDirection = new THREE.Vector3(10, 0, 0)
-    raycasterDirection.normalize()
+    // // Raycaster
+    // const raycasterOrigin = new THREE.Vector3(-10, 0, 0)
+    // const raycasterDirection = new THREE.Vector3(10, 0, 0)
+    // raycasterDirection.normalize()
 
-    const raycaster = new THREE.Raycaster()
+    // const raycaster = new THREE.Raycaster()
 
-    raycaster.set(raycasterOrigin, raycasterDirection)
+    // raycaster.set(raycasterOrigin, raycasterDirection)
 
-    const objectsToTest = [object1, object2, object3]
-    const intersects = raycaster.intersectObjects(objectsToTest)
+    // const objectsToTest = [object1, object2, object3]
+    // const intersects = raycaster.intersectObjects(objectsToTest)
 
-    for (const object of objectsToTest) {
-        object.material.color.set('red')
-    }
+    // for (const object of objectsToTest) {
+    //     object.material.color.set('red')
+    // }
 
-    for (const intersect of intersects) {
-        intersect.object.material.color.set('blue')
-    }
+    // for (const intersect of intersects) {
+    //     intersect.object.material.color.set('blue')
+    // }
 
     // Update controls
     controls.update()
