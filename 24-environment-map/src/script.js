@@ -1,6 +1,12 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+/**
+ *  Loaders
+ */
+const gltifLoader = new GLTFLoader()
 
 /**
  * Base
@@ -23,6 +29,18 @@ const torusKnot = new THREE.Mesh(
 )
 torusKnot.position.y = 4
 scene.add(torusKnot)
+
+/**
+ *  Models
+ */
+gltifLoader.load(
+    './models/FlightHelmet/glTF/FlightHelmet.gltf',
+    (gltf) => {
+        console.log('success')
+        gltf.scene.scale.setScalar(10)
+        scene.add(gltf.scene)
+    }
+)
 
 /**
  * Sizes
