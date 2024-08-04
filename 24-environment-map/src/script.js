@@ -50,8 +50,17 @@ gui.add(scene.environmentRotation, 'y').min(0).max(Math.PI * 2).step(0.001).name
 // scene.background = environmentMap
 
 // HDR
+// rgbeLoader.load(
+//     './environmentMaps/0/2k.hdr',
+//     (envMap) => {
+//         envMap.mapping = THREE.EquirectangularReflectionMapping
+//         scene.background = envMap
+//         scene.environment = envMap
+//     }
+// )
+
 rgbeLoader.load(
-    './environmentMaps/0/2k.hdr',
+    './environmentMaps/blender-2k.hdr',
     (envMap) => {
         envMap.mapping = THREE.EquirectangularReflectionMapping
         scene.background = envMap
