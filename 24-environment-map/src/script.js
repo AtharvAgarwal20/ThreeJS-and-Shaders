@@ -60,7 +60,7 @@ gui.add(scene.environmentRotation, 'y').min(0).max(Math.PI * 2).step(0.001).name
 // )
 
 rgbeLoader.load(
-    './environmentMaps/blender-2k.hdr',
+    './environmentMaps/blender-2k(2).hdr',
     (envMap) => {
         envMap.mapping = THREE.EquirectangularReflectionMapping
         scene.background = envMap
