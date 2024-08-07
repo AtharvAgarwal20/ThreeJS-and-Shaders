@@ -57,21 +57,21 @@ gui.add(scene.environmentRotation, 'y').min(0).max(Math.PI * 2).step(0.001).name
 // scene.environment = environmentMap
 // scene.background = environmentMap
 
-// HDR
-rgbeLoader.load(
-    './environmentMaps/0/2k.hdr',
-    (envMap) => {
-        envMap.mapping = THREE.EquirectangularReflectionMapping
-        // scene.background = envMap
-        scene.environment = envMap
+// // HDR
+// rgbeLoader.load(
+//     './environmentMaps/0/2k.hdr',
+//     (envMap) => {
+//         envMap.mapping = THREE.EquirectangularReflectionMapping
+//         // scene.background = envMap
+//         scene.environment = envMap
 
-        // Skybox
-        const skybox = new GroundedSkybox(envMap, 15, 70)
-        skybox.position.y = 15
-        // skybox.material.wireframe = true
-        scene.add(skybox)
-    }
-)
+//         // Skybox
+//         const skybox = new GroundedSkybox(envMap, 15, 70)
+//         skybox.position.y = 15
+//         // skybox.material.wireframe = true
+//         scene.add(skybox)
+//     }
+// )
 
 // rgbeLoader.load(
 //     './environmentMaps/blender-2k(2).hdr',
@@ -81,6 +81,32 @@ rgbeLoader.load(
 //         scene.environment = envMap
 //     }
 // )
+
+/**
+ *  Real-time environment map
+ */
+const environmentMap = textureLoader.load('./environmentMaps/blockadesLabsSkybox/interior_views_cozy_wood_cabin_with_cauldron_and_p.jpg')
+environmentMap.mapping = THREE.EquirectangularReflectionMapping
+environmentMap.colorSpace = THREE.SRGBColorSpace
+scene.background = environmentMap
+
+// Holy Donut
+const holyDonut = new THREE.Mesh(
+    new THREE.TorusGeometry(8, 0.5),
+    new THREE.MeshBasicMaterial({ color: new THREE.Color(10, 4, 2) })
+)
+holyDonut.position.y = 3.5
+scene.add(holyDonut)
+
+// Cube render target
+const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256, {
+    type: THREE.HalfFloatType
+})
+
+scene.environment = cubeRenderTarget.texture
+
+// Cube camera
+const cubeCamera = new THREE.CubeCamera(0.1, 100, cubeRenderTarget)
 
 /**
  * Torus Knot
@@ -156,6 +182,12 @@ const clock = new THREE.Clock()
 const tick = () => {
     // Time
     const elapsedTime = clock.getElapsedTime()
+
+    // Realtime Env Map
+    if (holyDonut) {
+        holyDonut.rotation.x = elapsedTime
+        cubeCamera.update(renderer, scene)
+    }
 
     // Update controls
     controls.update()
