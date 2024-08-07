@@ -3,13 +3,15 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js'
 
 /**
  *  Loaders
  */
 const gltifLoader = new GLTFLoader()
-// const cubeTextureLoader = new THREE.CubeTextureLoader()
+const cubeTextureLoader = new THREE.CubeTextureLoader()
 const rgbeLoader = new RGBELoader()
+const textureLoader = new THREE.TextureLoader()
 
 /**
  * Base
@@ -49,24 +51,36 @@ gui.add(scene.environmentRotation, 'y').min(0).max(Math.PI * 2).step(0.001).name
 // scene.environment = environmentMap
 // scene.background = environmentMap
 
+// const environmentMap = textureLoader.load('./environmentMaps/blockadesLabsSkybox/anime_art_style_japan_streets_with_cherry_blossom_.jpg')
+// environmentMap.mapping = THREE.EquirectangularReflectionMapping
+// environmentMap.colorSpace = THREE.SRGBColorSpace
+// scene.environment = environmentMap
+// scene.background = environmentMap
+
 // HDR
+rgbeLoader.load(
+    './environmentMaps/0/2k.hdr',
+    (envMap) => {
+        envMap.mapping = THREE.EquirectangularReflectionMapping
+        // scene.background = envMap
+        scene.environment = envMap
+
+        // Skybox
+        const skybox = new GroundedSkybox(envMap, 15, 70)
+        skybox.position.y = 15
+        // skybox.material.wireframe = true
+        scene.add(skybox)
+    }
+)
+
 // rgbeLoader.load(
-//     './environmentMaps/0/2k.hdr',
+//     './environmentMaps/blender-2k(2).hdr',
 //     (envMap) => {
 //         envMap.mapping = THREE.EquirectangularReflectionMapping
 //         scene.background = envMap
 //         scene.environment = envMap
 //     }
 // )
-
-rgbeLoader.load(
-    './environmentMaps/blender-2k(2).hdr',
-    (envMap) => {
-        envMap.mapping = THREE.EquirectangularReflectionMapping
-        scene.background = envMap
-        scene.environment = envMap
-    }
-)
 
 /**
  * Torus Knot
