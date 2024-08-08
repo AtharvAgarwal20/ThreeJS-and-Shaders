@@ -7,8 +7,10 @@ uniform float uTime;
 
 attribute vec3 position;
 attribute float aRandom;
+attribute vec2 uv;
 
 varying float vRandom;
+varying vec2 vUv;
 
 float loremIpsum(float a, float b){
     // float a = 1.0;
@@ -51,6 +53,7 @@ void main() {
     gl_Position = projectedPosition;
 
     // vRandom = aRandom;
+    vUv = uv;
 
     // gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }
