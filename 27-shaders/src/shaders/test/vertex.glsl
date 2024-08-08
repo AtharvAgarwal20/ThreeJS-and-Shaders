@@ -11,13 +11,14 @@ attribute vec2 uv;
 
 varying float vRandom;
 varying vec2 vUv;
+varying float vElevation;
 
-float loremIpsum(float a, float b){
-    // float a = 1.0;
-    // float b = 3.0;
+// float loremIpsum(float a, float b){
+//     // float a = 1.0;
+//     // float b = 3.0;
 
-    return a + b;
-}
+//     return a + b;
+// }
 
 void main() {
     // vec3 bar = vec3(1.0, 2.0, 3.0);
@@ -40,11 +41,15 @@ void main() {
     // float barZ = foo.z;
     // float barW = foo.w;                      // float barW = foo.a;
 
-    float result = loremIpsum(1.0, 5.0);
+    // float result = loremIpsum(1.0, 5.0);
+
 
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-    modelPosition.z += sin(modelPosition.x * uFrequency.x - uTime) / 10.0;
-    modelPosition.z += sin(modelPosition.y * uFrequency.y - uTime) / 10.0;
+
+    float elevation = sin(modelPosition.x * uFrequency.x - uTime) / 10.0;
+    elevation += sin(modelPosition.y * uFrequency.y - uTime) / 10.0;
+
+    modelPosition.z += elevation;
     // modelPosition.z += aRandom * 0.1;
 
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -54,6 +59,7 @@ void main() {
 
     // vRandom = aRandom;
     vUv = uv;
+    vElevation = elevation;
 
     // gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }
