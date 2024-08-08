@@ -43,8 +43,10 @@ const material = new THREE.RawShaderMaterial({
     transparent: true,
     uniforms: {
         uFrequency: { value: new THREE.Vector2(10, 5) },
-        uTime: { value: 0.0 }
-    }
+        uTime: { value: 0.0 },
+        uColor: { value: new THREE.Color('orange') }
+    },
+    side: THREE.DoubleSide
 })
 
 gui.add(material.uniforms.uFrequency.value, 'x').min(0).max(20).step(0.01).name("Frequency X")
@@ -52,6 +54,9 @@ gui.add(material.uniforms.uFrequency.value, 'y').min(0).max(20).step(0.01).name(
 
 // Mesh
 const mesh = new THREE.Mesh(geometry, material)
+
+mesh.scale.y = 2 / 3
+
 scene.add(mesh)
 
 /**
