@@ -15,5 +15,15 @@ void main() {
     // color.g = 3.0;
     // color.b = 4.0;
 
+    // vec2 foo = vec2(1.0, 2.0);
+    // vec3 bar = vec3(foo, 3.0);
+    // vec2 demo = bar.xy;
+
+    // vec4 foo = vec4(1.0, 2.0, 3.0, 4.0);
+    // float barX = foo.x;
+    // float barY = foo.y;
+    // float barZ = foo.z;
+    // float barW = foo.w;         // float barW = foo.a;
+
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }
