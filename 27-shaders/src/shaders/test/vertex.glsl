@@ -30,9 +30,17 @@ void main() {
     // float barX = foo.x;
     // float barY = foo.y;
     // float barZ = foo.z;
-    // float barW = foo.w;         // float barW = foo.a;
+    // float barW = foo.w;                      // float barW = foo.a;
 
     float result = loremIpsum(1.0, 5.0);
 
-    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+    modelPosition.z += sin(modelPosition.x * 10.0) / 10.0;
+
+    vec4 viewPosition = viewMatrix * modelPosition;
+    vec4 projectedPosition = projectionMatrix * viewPosition;
+
+    gl_Position = projectedPosition;
+
+    // gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }
