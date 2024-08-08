@@ -1,5 +1,3 @@
-precision mediump float;
-
 varying float vRandom;
 varying vec2 vUv;
 
