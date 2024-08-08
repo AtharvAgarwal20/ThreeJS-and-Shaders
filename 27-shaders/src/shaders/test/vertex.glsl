@@ -4,6 +4,13 @@ uniform mat4 modelMatrix;
 
 attribute vec3 position;
 
+float loremIpsum(float a, float b){
+    // float a = 1.0;
+    // float b = 3.0;
+
+    return a + b;
+}
+
 void main() {
     // vec3 bar = vec3(1.0, 2.0, 3.0);
     // bar.x = 2.0;
@@ -24,6 +31,8 @@ void main() {
     // float barY = foo.y;
     // float barZ = foo.z;
     // float barW = foo.w;         // float barW = foo.a;
+
+    float result = loremIpsum(1.0, 5.0);
 
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }
