@@ -94,6 +94,7 @@ gltfLoader.load('./models.glb', (gltf) => {
 
     // Positions
     const positions = gltf.scene.children.map((child) => {
+        console.log(child)
         return child.geometry.attributes.position
     })
 
