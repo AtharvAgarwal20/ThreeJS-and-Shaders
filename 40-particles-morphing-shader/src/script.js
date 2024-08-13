@@ -117,9 +117,11 @@ gltfLoader.load('./models.glb', (gltf) => {
                 newArray[i3 + 2] = originalArray[i3 + 2]
             }
             else {
-                newArray[i3 + 0] = 0
-                newArray[i3 + 1] = 0
-                newArray[i3 + 2] = 0
+                const randomIndex = Math.floor(position.count * Math.random()) * 3
+
+                newArray[i3 + 0] = originalArray[randomIndex + 0]
+                newArray[i3 + 1] = originalArray[randomIndex + 1]
+                newArray[i3 + 2] = originalArray[randomIndex + 2]
             }
         }
 
@@ -127,7 +129,9 @@ gltfLoader.load('./models.glb', (gltf) => {
     }
 
     // Geometry
-    particles.geometry = new THREE.SphereGeometry(3)
+    particles.geometry = new THREE.BufferGeometry()
+    particles.geometry.setAttribute('position', particles.positions[1])
+    particles.geometry.setAttribute('aPositionTarget', particles.positions[3])
     particles.geometry.setIndex(null)
 
     // Material
@@ -136,8 +140,9 @@ gltfLoader.load('./models.glb', (gltf) => {
         fragmentShader: particlesFragmentShader,
         uniforms:
         {
-            uSize: new THREE.Uniform(0.4),
-            uResolution: new THREE.Uniform(new THREE.Vector2(sizes.width * sizes.pixelRatio, sizes.height * sizes.pixelRatio))
+            uSize: new THREE.Uniform(0.2),
+            uResolution: new THREE.Uniform(new THREE.Vector2(sizes.width * sizes.pixelRatio, sizes.height * sizes.pixelRatio)),
+            uProgress: new THREE.Uniform(0)
         },
         blending: THREE.AdditiveBlending,
         depthWrite: false
@@ -146,6 +151,9 @@ gltfLoader.load('./models.glb', (gltf) => {
     // Points
     particles.points = new THREE.Points(particles.geometry, particles.material)
     scene.add(particles.points)
+
+    // Tweaks
+    gui.add(particles.material.uniforms.uProgress, 'value').min(0).max(1).step(0.001).name('uProgress')
 })
 
 /**
