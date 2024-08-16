@@ -92,8 +92,50 @@ void main()
     // strength *= floor(vUv.y * 10.0) / 10.0;
     // vec4 pattern = vec4(vec3(strength), 1.0);
 
-    // Pattern 21
-    float strength = random(vUv);
+    // // Pattern 21
+    // float strength = random(vUv);
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 22
+    // vec2 gridUv = vec2(floor(vUv.x * 10.0) / 10.0, floor(vUv.y * 10.0) / 10.0);
+    // float strength = random(gridUv);
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 23
+    // vec2 gridUv = vec2(floor(vUv.x * 10.0) / 10.0, floor((vUv.y + vUv.x * 0.5) * 10.0) / 10.0);
+    // float strength = random(gridUv);
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 24
+    // float strength = length(vUv);
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 25
+    // float strength = distance(vUv, vec2(0.5));
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 26
+    // float strength = 1.0 - distance(vUv, vec2(0.5));
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 27
+    // float strength = 0.015 / distance(vUv, vec2(0.5));
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 28
+    // float strength = 0.015 / distance(vec2(vUv.x * 0.1 + 0.45, vUv.y * 0.5 + 0.25), vec2(0.5));
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // // Pattern 29
+    // float lightX = 0.015 / distance(vec2(vUv.x * 0.1 + 0.45, vUv.y * 0.5 + 0.25), vec2(0.5));
+    // float lightY = 0.015 / distance(vec2(vUv.y * 0.1 + 0.45, vUv.x * 0.5 + 0.25), vec2(0.5));
+    // float strength = lightX * lightY;
+    // vec4 pattern = vec4(vec3(strength), 1.0);
+
+    // Pattern 29
+    float lightX = 0.015 / distance(vec2(vUv.x * 0.1 + 0.45, vUv.y * 0.5 + 0.25), vec2(0.5));
+    float lightY = 0.015 / distance(vec2(vUv.y * 0.1 + 0.45, vUv.x * 0.5 + 0.25), vec2(0.5));
+    float strength = lightX * lightY;
     vec4 pattern = vec4(vec3(strength), 1.0);
 
     gl_FragColor = vec4(pattern);
