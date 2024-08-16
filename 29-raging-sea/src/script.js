@@ -10,7 +10,7 @@ import waterFragmentShader from './shaders/water/fragment.glsl'
 // Debug
 const gui = new GUI({ width: 340 })
 const debugObject = {
-    depthColor: '#186691',
+    depthColor: '#4199c8',
     surfaceColor: '#9bd8ff'
 }
 
@@ -24,7 +24,7 @@ const scene = new THREE.Scene()
  * Water
  */
 // Geometry
-const waterGeometry = new THREE.PlaneGeometry(2, 2, 128, 128)
+const waterGeometry = new THREE.PlaneGeometry(2, 2, 512, 512)
 
 // Material
 const waterMaterial = new THREE.ShaderMaterial({
