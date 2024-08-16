@@ -1,3 +1,5 @@
+#define PI 3.1415926535897932384626433832795
+
 varying vec2 vUv;
 
 float random (vec2 st) {
@@ -140,9 +142,10 @@ void main()
     // float strength = lightX * lightY;
     // vec4 pattern = vec4(vec3(strength), 1.0);
 
-    // Pattern 29
-    float lightX = 0.015 / distance(vec2(vUv.x * 0.1 + 0.45, vUv.y * 0.5 + 0.25), vec2(0.5));
-    float lightY = 0.015 / distance(vec2(vUv.y * 0.1 + 0.45, vUv.x * 0.5 + 0.25), vec2(0.5));
+    // Pattern 30
+    vec2 rotatedUv = rotate(vUv, 1.0, vec2(0.5));
+    float lightX = 0.015 / distance(vec2(rotatedUv.x * 0.1 + 0.45, rotatedUv.y * 0.5 + 0.25), vec2(0.5));
+    float lightY = 0.015 / distance(vec2(rotatedUv.y * 0.1 + 0.45, rotatedUv.x * 0.5 + 0.25), vec2(0.5));
     float strength = lightX * lightY;
     vec4 pattern = vec4(vec3(strength), 1.0);
 
