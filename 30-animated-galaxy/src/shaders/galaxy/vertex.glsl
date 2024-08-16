@@ -1,5 +1,7 @@
 uniform float uSize;
 
+attribute float aScale;
+
 void main(){
     /**
      *  Position
@@ -13,5 +15,5 @@ void main(){
     /**
      *  Position
      */
-    gl_PointSize = uSize;
+    gl_PointSize = uSize * aScale;
 }
