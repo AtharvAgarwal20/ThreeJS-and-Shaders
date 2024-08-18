@@ -92,7 +92,7 @@ smokeGeometry.translate(0, 0.5, 0)
 smokeGeometry.scale(1.5, 6, 1.5)
 
 const smokeMaterial = new THREE.ShaderMaterial({
-    wireframe: true,
+    // wireframe: true,
     vertexShader: smokeVertexShader,
     fragmentShader: smokeFragmentShader,
     side: THREE.DoubleSide,
