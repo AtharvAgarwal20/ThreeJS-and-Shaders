@@ -23,6 +23,8 @@ const textureLoader = new THREE.TextureLoader()
 const gltfLoader = new GLTFLoader()
 
 const perlinTexture = textureLoader.load('./perlin.png')
+perlinTexture.wrapS = THREE.RepeatWrapping
+perlinTexture.wrapT = THREE.RepeatWrapping
 
 /**
  * Sizes
@@ -95,7 +97,8 @@ const smokeMaterial = new THREE.ShaderMaterial({
     fragmentShader: smokeFragmentShader,
     side: THREE.DoubleSide,
     uniforms: {
-        uPerlinTexture: new THREE.Uniform(perlinTexture)
+        uPerlinTexture: new THREE.Uniform(perlinTexture),
+        uTime: new THREE.Uniform(0.0)
     },
     transparent: true
 })
@@ -111,6 +114,9 @@ const clock = new THREE.Clock()
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update time
+    smokeMaterial.uniforms.uTime.value = elapsedTime
 
     // Update controls
     controls.update()
