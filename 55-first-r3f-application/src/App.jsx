@@ -5,6 +5,9 @@ export default function App() {
     return (
         <Canvas
             // orthographic
+            gl={{
+                antialias: false,
+            }}
             camera={{
                 fov: 45,
                 // zoom: 100,

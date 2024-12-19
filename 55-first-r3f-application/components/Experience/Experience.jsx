@@ -15,13 +15,13 @@ export default function Experience() {
         cubeRef.current.rotation.y -= delta;
         // cubeAndSphereRef.current.rotation.y += delta;
 
-        state.camera.position.x = Math.sin(state.clock.elapsedTime) * 8;
-        state.camera.position.z = Math.cos(state.clock.elapsedTime) * 8;
-        state.camera.lookAt(0, 0, 0);
+        // state.camera.position.x = Math.sin(state.clock.elapsedTime) * 8;
+        // state.camera.position.z = Math.cos(state.clock.elapsedTime) * 8;
+        // state.camera.lookAt(0, 0, 0);
     });
     return (
         <>
-            {/*<orbitControls args={[camera, gl.domElement]} />*/}
+            <orbitControls args={[camera, gl.domElement]} />
 
             <directionalLight position={[1, 2, 3]} intensity={4.5} />
             <ambientLight intensity={1.5} />
