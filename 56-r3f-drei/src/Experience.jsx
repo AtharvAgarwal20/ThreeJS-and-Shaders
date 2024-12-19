@@ -1,4 +1,5 @@
 import {
+  Float,
   Html,
   OrbitControls,
   PivotControls,
@@ -52,16 +53,18 @@ export default function Experience() {
         <meshStandardMaterial color="greenyellow" />
       </mesh>
 
-      <Text
-        font="./bangers-v20-latin-regular.woff"
-        fontSize={0.6}
-        color="salmon"
-        position={[0, 2, -1]}
-        maxWidth={2}
-        textAlign="center"
-      >
-        I LOVE R3F
-      </Text>
+      <Float speed={5} floatIntensity={2}>
+        <Text
+          font="./bangers-v20-latin-regular.woff"
+          fontSize={0.6}
+          color="salmon"
+          position={[0, 2, -1]}
+          maxWidth={2}
+          textAlign="center"
+        >
+          I LOVE R3F
+        </Text>
+      </Float>
     </>
   );
 }
