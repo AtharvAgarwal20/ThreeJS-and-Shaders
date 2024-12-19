@@ -15,7 +15,14 @@ export default function Experience() {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <PivotControls anchor={[0, 0, 0]} depthTest={false}>
+      <PivotControls
+        anchor={[0, 0, 0]} // relative to mesh
+        depthTest={false} // shows on top of everything
+        lineWidth={4}
+        axisColors={[0x93811ff, 0xff4d6d, 0x7ae582]}
+        scale={100}
+        fixed={true}
+      >
         <mesh position-x={-2}>
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
