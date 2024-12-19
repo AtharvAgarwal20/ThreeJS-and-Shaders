@@ -7,8 +7,9 @@ export default function App() {
         <Canvas
             // orthographic
             gl={{
-                antialias: false,
-                toneMapping: THREE.ReinhardToneMapping,
+                antialias: false, // default is true
+                toneMapping: THREE.ReinhardToneMapping, // default is ACESFilmic
+                outputColorSpace: THREE.LinearSRGBColorSpace, // default is SRGB
             }}
             camera={{
                 fov: 45,
