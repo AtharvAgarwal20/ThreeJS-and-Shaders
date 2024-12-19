@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import Experience from '../components/Experience/Experience';
+import * as THREE from 'three';
 
 export default function App() {
     return (
@@ -7,6 +8,7 @@ export default function App() {
             // orthographic
             gl={{
                 antialias: false,
+                toneMapping: THREE.ReinhardToneMapping,
             }}
             camera={{
                 fov: 45,
