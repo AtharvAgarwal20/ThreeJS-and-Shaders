@@ -1,12 +1,10 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas } from '@react-three/fiber';
+import Experience from '../components/Experience/Experience';
 
 export default function App() {
-  return (
-    <Canvas>
-      <mesh>
-        <torusKnotGeometry />
-        <meshNormalMaterial />
-      </mesh>
-    </Canvas>
-  );
+    return (
+        <Canvas>
+            <Experience />
+        </Canvas>
+    );
 }
