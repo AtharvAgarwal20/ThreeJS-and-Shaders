@@ -6,7 +6,7 @@ export default function App() {
     return (
         <Canvas
             // orthographic
-            dpr={[1, 2]} // clamping pixel ratio between 1 and 2. Good for performance since phones have high pixel ratio but insufficient performance power
+            dpr={[1, 2]} // default, clamping pixel ratio between 1 and 2. Good for performance since phones have high pixel ratio but insufficient performance power
             gl={{
                 antialias: false, // default is true
                 toneMapping: THREE.ReinhardToneMapping, // default is ACESFilmic
