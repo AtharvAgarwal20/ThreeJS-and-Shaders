@@ -1,6 +1,10 @@
 export default function Experience() {
     return (
         <>
+            <mesh position={[-2, 0, 0]}>
+                <sphereGeometry />
+                <meshBasicMaterial color={'orange'} />
+            </mesh>
             <mesh
                 scale={1.5}
                 position={[2, 0, 0]}
@@ -8,7 +12,15 @@ export default function Experience() {
             >
                 {/*<sphereGeometry args={[1.5, 32, 32]} />*/}
                 <boxGeometry />
-                <meshBasicMaterial color="red" wireframe={true} />
+                <meshBasicMaterial color="mediumpurple" />
+            </mesh>
+            <mesh
+                position={[0, -1, 0]}
+                rotation={[-Math.PI / 2, 0, 0]}
+                scale={10}
+            >
+                <planeGeometry />
+                <meshBasicMaterial color="greenyellow" />
             </mesh>
         </>
     );
