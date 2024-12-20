@@ -13,7 +13,8 @@ export default function Experience() {
         visible: true,
         clickMe: button(() => {
             console.log("Leva btn clicked")
-        })
+        }),
+        choice: {options: ['a', 'b', 'c', 'd', 'e']}
     })
 
     return <>
