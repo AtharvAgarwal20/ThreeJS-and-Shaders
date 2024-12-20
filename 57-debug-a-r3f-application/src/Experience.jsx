@@ -1,5 +1,6 @@
 import {OrbitControls} from '@react-three/drei'
 import {button, useControls} from "leva";
+import {Perf} from 'r3f-perf'
 
 export default function Experience() {
     const {position, color, visible} = useControls('sphere', {
@@ -27,6 +28,12 @@ export default function Experience() {
     })
 
     return <>
+        <Perf position='top-left'/>
+        {/*Most important is the reading under the GPU,
+           below 1ms is good,
+           2-2.5ms is edge of performance on normal pc,
+           3ms is absolute maximum you should have*/}
+
         <OrbitControls makeDefault/>
 
         <directionalLight position={[1, 2, 3]} intensity={4.5}/>
