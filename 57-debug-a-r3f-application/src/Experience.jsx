@@ -2,19 +2,28 @@ import {OrbitControls} from '@react-three/drei'
 import {button, useControls} from "leva";
 
 export default function Experience() {
-    const {spherePosition, sphereColor, visible} = useControls({
-        spherePosition: {
+    const {position, color, visible} = useControls('sphere', {
+        position: {
             value: {x: -2, y: 0, z: 0},
             // min: -5,
             // max: 5,
             step: 0.01
         },
-        sphereColor: 'orange',
+        color: 'orange',
         visible: true,
         clickMe: button(() => {
             console.log("Leva btn clicked")
         }),
         choice: {options: ['a', 'b', 'c', 'd', 'e']}
+    })
+
+    const {scale} = useControls('cube', {
+        scale: {
+            value: 1.5,
+            step: 0.01,
+            min: 0,
+            max: 10,
+        }
     })
 
     return <>
@@ -23,12 +32,12 @@ export default function Experience() {
         <directionalLight position={[1, 2, 3]} intensity={4.5}/>
         <ambientLight intensity={1.5}/>
 
-        <mesh position={[spherePosition.x, spherePosition.y, spherePosition.z]} visible={visible}>
+        <mesh position={[position.x, position.y, position.z]} visible={visible}>
             <sphereGeometry/>
-            <meshStandardMaterial color={sphereColor}/>
+            <meshStandardMaterial color={color}/>
         </mesh>
 
-        <mesh position-x={2} scale={1.5}>
+        <mesh position-x={2} scale={scale}>
             <boxGeometry/>
             <meshStandardMaterial color="mediumpurple"/>
         </mesh>
