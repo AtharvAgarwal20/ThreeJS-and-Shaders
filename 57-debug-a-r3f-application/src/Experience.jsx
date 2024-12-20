@@ -1,5 +1,5 @@
 import {OrbitControls} from '@react-three/drei'
-import {useControls} from "leva";
+import {button, useControls} from "leva";
 
 export default function Experience() {
     const {spherePosition, sphereColor, visible} = useControls({
@@ -10,7 +10,10 @@ export default function Experience() {
             step: 0.01
         },
         sphereColor: 'orange',
-        visible: true
+        visible: true,
+        clickMe: button(() => {
+            console.log("Leva btn clicked")
+        })
     })
 
     return <>
