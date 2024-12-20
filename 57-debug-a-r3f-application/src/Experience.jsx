@@ -2,14 +2,15 @@ import {OrbitControls} from '@react-three/drei'
 import {useControls} from "leva";
 
 export default function Experience() {
-    const {spherePosition, sphereColor} = useControls({
+    const {spherePosition, sphereColor, visible} = useControls({
         spherePosition: {
             value: {x: -2, y: 0, z: 0},
             // min: -5,
             // max: 5,
             step: 0.01
         },
-        sphereColor: '#ff0000'
+        sphereColor: 'orange',
+        visible: true
     })
 
     return <>
@@ -18,7 +19,7 @@ export default function Experience() {
         <directionalLight position={[1, 2, 3]} intensity={4.5}/>
         <ambientLight intensity={1.5}/>
 
-        <mesh position={[spherePosition.x, spherePosition.y, spherePosition.z]}>
+        <mesh position={[spherePosition.x, spherePosition.y, spherePosition.z]} visible={visible}>
             <sphereGeometry/>
             <meshStandardMaterial color={sphereColor}/>
         </mesh>
