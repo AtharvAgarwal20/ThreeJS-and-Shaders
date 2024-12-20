@@ -3,6 +3,13 @@ import {button, useControls} from "leva";
 import {Perf} from 'r3f-perf'
 
 export default function Experience() {
+    const {perfVisibility, perfPosition} = useControls({
+        perfVisibility: false,
+        perfPosition: {
+            options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+        }
+    })
+
     const {position, color, visible} = useControls('sphere', {
         position: {
             value: {x: -2, y: 0, z: 0},
@@ -28,7 +35,7 @@ export default function Experience() {
     })
 
     return <>
-        <Perf position='top-left'/>
+        {perfVisibility ? <Perf position={perfPosition}/> : null}
         {/*Most important is the reading under the GPU,
            below 1ms is good,
            2-2.5ms is edge of performance on normal pc,
