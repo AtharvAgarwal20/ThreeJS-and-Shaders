@@ -1,5 +1,5 @@
 import {useFrame} from '@react-three/fiber'
-import {ContactShadows, OrbitControls, useHelper} from '@react-three/drei'
+import {ContactShadows, OrbitControls, Sky, useHelper} from '@react-three/drei'
 import {useRef} from 'react'
 import {Perf} from 'r3f-perf'
 import * as THREE from "three";
@@ -20,6 +20,10 @@ export default function Experience() {
         color: "#1d8f75",
         opacity: {value: 0.4, max: 1, min: 0},
         blur: {value: 2.8, max: 10, min: 0},
+    })
+
+    const {sunPosition} = useControls('sky', {
+        sunPosition: [1, 2, 3]
     })
 
     return <>
@@ -63,7 +67,7 @@ export default function Experience() {
 
         <directionalLight
             ref={directionalLight}
-            position={[1, 2, 3]}
+            position={sunPosition}
             intensity={4.5}
             shadow-mapSize={[1024, 1024]}   // in threejs, this would've been shadow.mapSize
             shadow-camera-near={1}
@@ -75,6 +79,8 @@ export default function Experience() {
             castShadow={true}
         />
         <ambientLight intensity={1.5}/>
+
+        <Sky sunPosition={sunPosition}/>
 
         <mesh castShadow={true} position-x={-2}>
             <sphereGeometry/>
