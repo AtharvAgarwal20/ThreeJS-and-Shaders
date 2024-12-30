@@ -42,8 +42,8 @@ export default function Experience() {
 
         <Environment
             background
-            preset='night'
-            // files='./environmentMaps/the_sky_is_on_fire_2k.hdr'
+            // preset='night'
+            files='./environmentMaps/the_sky_is_on_fire_2k.hdr'
             // files={
             //     [
             //         './environmentMaps/2/px.jpg',
@@ -54,7 +54,12 @@ export default function Experience() {
             //         './environmentMaps/2/nz.jpg',
             //     ]
             // }
-        />
+        >
+            <mesh position={[0, 0, -5]} scale={10}>
+                <planeGeometry/>
+                <meshBasicMaterial color='red'/>
+            </mesh>
+        </Environment>
 
         <Perf position="top-left"/>
 
