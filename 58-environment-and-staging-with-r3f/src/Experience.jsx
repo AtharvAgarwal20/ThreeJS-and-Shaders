@@ -20,20 +20,20 @@ export default function Experience() {
 
         <OrbitControls makeDefault/>
 
-        <directionalLight ref={directionalLight} position={[1, 2, 3]} intensity={4.5}/>
+        <directionalLight ref={directionalLight} castShadow={true} position={[1, 2, 3]} intensity={4.5}/>
         <ambientLight intensity={1.5}/>
 
-        <mesh position-x={-2}>
+        <mesh castShadow={true} position-x={-2}>
             <sphereGeometry/>
             <meshStandardMaterial color="orange"/>
         </mesh>
 
-        <mesh ref={cube} position-x={2} scale={1.5}>
+        <mesh castShadow={true} ref={cube} position-x={2} scale={1.5}>
             <boxGeometry/>
             <meshStandardMaterial color="mediumpurple"/>
         </mesh>
 
-        <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
+        <mesh receiveShadow={true} position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
             <planeGeometry/>
             <meshStandardMaterial color="greenyellow"/>
         </mesh>
