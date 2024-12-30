@@ -24,9 +24,17 @@ export default function Experience() {
 
         <AccumulativeShadows
             position={[0, -0.99, 0]}
+            scale={10}
+            color="#316D39"
+            opacity={0.8}
         >
             <RandomizedLight
                 position={[1, 2, 3]}
+                amount={8}
+                radius={1}
+                ambient={0.5}
+                intensity={3}
+                bias={0.001}
             />
         </AccumulativeShadows>
 
