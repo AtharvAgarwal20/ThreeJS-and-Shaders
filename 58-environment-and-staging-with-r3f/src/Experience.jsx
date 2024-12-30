@@ -1,45 +1,64 @@
 import {useFrame} from '@react-three/fiber'
-import {AccumulativeShadows, OrbitControls, RandomizedLight} from '@react-three/drei'
+import {ContactShadows, OrbitControls, useHelper} from '@react-three/drei'
 import {useRef} from 'react'
 import {Perf} from 'r3f-perf'
+import * as THREE from "three";
+import {useControls} from "leva";
 
 export default function Experience() {
     const directionalLight = useRef(null);
     const cube = useRef(null)
 
-    // useHelper(directionalLight, THREE.DirectionalLightHelper)
+    useHelper(directionalLight, THREE.DirectionalLightHelper)
 
     useFrame((state, delta) => {
         cube.current.rotation.y += delta * 0.2
-        cube.current.position.x = 2 + Math.sin(state.clock.elapsedTime)
+        // cube.current.position.x = 2 + Math.sin(state.clock.elapsedTime)
+    })
+
+    const {color, opacity, blur} = useControls('contact shadows', {
+        color: "#1d8f75",
+        opacity: {value: 0.4, max: 1, min: 0},
+        blur: {value: 2.8, max: 10, min: 0},
     })
 
     return <>
         {/*<BakeShadows/>*/}
         {/*<SoftShadows size={25} samples={10} focus={0}/>*/}
 
+
         <Perf position="top-left"/>
 
         <OrbitControls makeDefault/>
 
-        <AccumulativeShadows
+        {/*<AccumulativeShadows*/}
+        {/*    position={[0, -0.99, 0]}*/}
+        {/*    scale={10}*/}
+        {/*    color="#316D39"*/}
+        {/*    opacity={0.8}*/}
+        {/*    frames={Infinity}*/}
+        {/*    temporal*/}
+        {/*    blend={100}*/}
+        {/*>*/}
+        {/*    <RandomizedLight*/}
+        {/*        position={[1, 2, 3]}*/}
+        {/*        amount={8}*/}
+        {/*        radius={1}*/}
+        {/*        ambient={0.5}*/}
+        {/*        intensity={3}*/}
+        {/*        bias={0.001}*/}
+        {/*    />*/}
+        {/*</AccumulativeShadows>*/}
+
+        <ContactShadows
             position={[0, -0.99, 0]}
             scale={10}
-            color="#316D39"
-            opacity={0.8}
-            frames={Infinity}
-            temporal
-            blend={100}
-        >
-            <RandomizedLight
-                position={[1, 2, 3]}
-                amount={8}
-                radius={1}
-                ambient={0.5}
-                intensity={3}
-                bias={0.001}
-            />
-        </AccumulativeShadows>
+            resolution={512}
+            far={5}
+            color={color}
+            opacity={opacity}
+            blur={blur}
+        />
 
         <directionalLight
             ref={directionalLight}
