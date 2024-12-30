@@ -1,5 +1,5 @@
 import {useFrame} from '@react-three/fiber'
-import {OrbitControls, SoftShadows, useHelper} from '@react-three/drei'
+import {AccumulativeShadows, OrbitControls, RandomizedLight, useHelper} from '@react-three/drei'
 import {useRef} from 'react'
 import {Perf} from 'r3f-perf'
 import * as THREE from 'three'
@@ -16,11 +16,19 @@ export default function Experience() {
 
     return <>
         {/*<BakeShadows/>*/}
-        <SoftShadows size={25} samples={10} focus={0}/>
+        {/*<SoftShadows size={25} samples={10} focus={0}/>*/}
 
         <Perf position="top-left"/>
 
         <OrbitControls makeDefault/>
+
+        <AccumulativeShadows
+            position={[0, -0.99, 0]}
+        >
+            <RandomizedLight
+                position={[1, 2, 3]}
+            />
+        </AccumulativeShadows>
 
         <directionalLight
             ref={directionalLight}
@@ -47,7 +55,7 @@ export default function Experience() {
             <meshStandardMaterial color="mediumpurple"/>
         </mesh>
 
-        <mesh receiveShadow={true} position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
+        <mesh receiveShadow={false} position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
             <planeGeometry/>
             <meshStandardMaterial color="greenyellow"/>
         </mesh>
