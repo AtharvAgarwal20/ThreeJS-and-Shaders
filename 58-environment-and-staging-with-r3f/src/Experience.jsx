@@ -27,6 +27,8 @@ export default function Experience() {
             scale={10}
             color="#316D39"
             opacity={0.8}
+            frames={1000}
+            temporal
         >
             <RandomizedLight
                 position={[1, 2, 3]}
