@@ -11,6 +11,7 @@ export default function Experience() {
 
     useFrame((state, delta) => {
         cube.current.rotation.y += delta * 0.2
+        cube.current.position.x = 2 + Math.sin(state.clock.elapsedTime)
     })
 
     return <>
@@ -26,8 +27,9 @@ export default function Experience() {
             scale={10}
             color="#316D39"
             opacity={0.8}
-            frames={1000}
+            frames={Infinity}
             temporal
+            blend={100}
         >
             <RandomizedLight
                 position={[1, 2, 3]}
