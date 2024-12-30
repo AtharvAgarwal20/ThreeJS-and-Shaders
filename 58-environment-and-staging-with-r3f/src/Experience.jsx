@@ -58,6 +58,7 @@ export default function Experience() {
             color={color}
             opacity={opacity}
             blur={blur}
+            frames={1}
         />
 
         <directionalLight
