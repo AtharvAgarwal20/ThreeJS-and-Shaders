@@ -21,7 +21,13 @@ export default function Experience() {
 
         <OrbitControls makeDefault/>
 
-        <directionalLight ref={directionalLight} castShadow={true} position={[1, 2, 3]} intensity={4.5}/>
+        <directionalLight
+            ref={directionalLight}
+            position={[1, 2, 3]}
+            intensity={4.5}
+            shadow-mapSize={[1024, 1024]}   // in threejs, this would've been shadow.mapSize
+            castShadow={true}
+        />
         <ambientLight intensity={1.5}/>
 
         <mesh castShadow={true} position-x={-2}>
