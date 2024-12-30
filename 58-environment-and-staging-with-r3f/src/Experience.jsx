@@ -1,14 +1,13 @@
 import {useFrame} from '@react-three/fiber'
-import {AccumulativeShadows, OrbitControls, RandomizedLight, useHelper} from '@react-three/drei'
+import {AccumulativeShadows, OrbitControls, RandomizedLight} from '@react-three/drei'
 import {useRef} from 'react'
 import {Perf} from 'r3f-perf'
-import * as THREE from 'three'
 
 export default function Experience() {
     const directionalLight = useRef(null);
     const cube = useRef(null)
 
-    useHelper(directionalLight, THREE.DirectionalLightHelper)
+    // useHelper(directionalLight, THREE.DirectionalLightHelper)
 
     useFrame((state, delta) => {
         cube.current.rotation.y += delta * 0.2
