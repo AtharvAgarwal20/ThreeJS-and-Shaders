@@ -18,7 +18,7 @@ root.render(
         //     scene.background = new THREE.Color('#ff0000')
         // }}
     >
-        <color args={["#ff0000"]} attach="background"/>
+        <color args={["ivory"]} attach="background"/>
         <Experience/>
     </Canvas>
 )
