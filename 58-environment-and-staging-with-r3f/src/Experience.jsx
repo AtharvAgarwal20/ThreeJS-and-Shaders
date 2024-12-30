@@ -1,5 +1,5 @@
 import {useFrame, useThree} from '@react-three/fiber'
-import {ContactShadows, Environment, OrbitControls, useHelper} from '@react-three/drei'
+import {ContactShadows, Environment, Lightformer, OrbitControls, useHelper} from '@react-three/drei'
 import {useEffect, useRef} from 'react'
 import {Perf} from 'r3f-perf'
 import * as THREE from "three";
@@ -42,8 +42,8 @@ export default function Experience() {
 
         <Environment
             background
-            // preset='night'
-            files='./environmentMaps/the_sky_is_on_fire_2k.hdr'
+            preset='sunset'
+            // files='./environmentMaps/the_sky_is_on_fire_2k.hdr'
             // files={
             //     [
             //         './environmentMaps/2/px.jpg',
@@ -55,10 +55,18 @@ export default function Experience() {
             //     ]
             // }
         >
-            <mesh position={[0, 0, -5]} scale={10}>
-                <planeGeometry/>
-                <meshBasicMaterial color='red'/>
-            </mesh>
+            <color args={['#000000']} attach='background'/>
+            <Lightformer
+                position={[0, 0, -5]}
+                scale={10}
+                color='red'
+                intensity={10}
+                form='ring'
+            />
+            {/*<mesh position={[0, 0, -5]} scale={10}>*/}
+            {/*    <planeGeometry/>*/}
+            {/*    <meshBasicMaterial color={[10, 0, 0]}/>*/}
+            {/*</mesh>*/}
         </Environment>
 
         <Perf position="top-left"/>
