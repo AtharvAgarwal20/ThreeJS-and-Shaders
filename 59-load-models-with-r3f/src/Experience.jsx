@@ -1,7 +1,7 @@
 import {OrbitControls} from '@react-three/drei'
 import {Perf} from 'r3f-perf'
-import Model from "./Model.jsx";
 import {Suspense} from "react";
+import Hamburger from "./Hamburger.jsx";
 
 function Placeholder({position, scale, boxArgs, color}) {
     return (
@@ -36,7 +36,8 @@ export default function Experience() {
                     color="red"
                 />
             )}>
-            <Model/>
+            {/*<Model/>*/}
+            <Hamburger/>
         </Suspense>
     </>
 }
