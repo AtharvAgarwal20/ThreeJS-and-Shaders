@@ -1,5 +1,5 @@
 import {useFrame, useThree} from '@react-three/fiber'
-import {ContactShadows, Environment, OrbitControls, useHelper} from '@react-three/drei'
+import {OrbitControls, useHelper} from '@react-three/drei'
 import {useEffect, useRef} from 'react'
 import {Perf} from 'r3f-perf'
 import * as THREE from "three";
@@ -16,15 +16,15 @@ export default function Experience() {
         // cube.current.position.x = 2 + Math.sin(state.clock.elapsedTime)
     })
 
-    const {color, opacity, blur} = useControls('contact shadows', {
-        color: "#4b2709",
-        opacity: {value: 0.4, max: 1, min: 0},
-        blur: {value: 2.8, max: 10, min: 0},
-    })
+    // const {color, opacity, blur} = useControls('contact shadows', {
+    //     color: "#4b2709",
+    //     opacity: {value: 0.4, max: 1, min: 0},
+    //     blur: {value: 2.8, max: 10, min: 0},
+    // })
 
-    const {sunPosition} = useControls('sky', {
-        sunPosition: [1, 2, 3]
-    })
+    // const {sunPosition} = useControls('sky', {
+    //     sunPosition: [1, 2, 3]
+    // })
 
     const {envMapIntensity, envMapHeight, envMapScale, envMapRadius} = useControls('environment', {
         envMapIntensity: {value: 1.5, min: 0, max: 12},
@@ -43,39 +43,39 @@ export default function Experience() {
         {/*<BakeShadows/>*/}
         {/*<SoftShadows size={25} samples={10} focus={0}/>*/}
 
-        <Environment
-            // background
-            preset='sunset'
-            ground={{
-                height: envMapHeight,
-                radius: envMapRadius,
-                scale: envMapScale
-            }}
-            // files='./environmentMaps/the_sky_is_on_fire_2k.hdr'
-            // files={
-            //     [
-            //         './environmentMaps/2/px.jpg',
-            //         './environmentMaps/2/nx.jpg',
-            //         './environmentMaps/2/py.jpg',
-            //         './environmentMaps/2/ny.jpg',
-            //         './environmentMaps/2/pz.jpg',
-            //         './environmentMaps/2/nz.jpg',
-            //     ]
-            // }
-        >
-            {/*<color args={['#000000']} attach='background'/>*/}
-            {/*<Lightformer*/}
-            {/*    position={[0, 0, -5]}*/}
-            {/*    scale={10}*/}
-            {/*    color='red'*/}
-            {/*    intensity={10}*/}
-            {/*    form='ring'*/}
-            {/*/>*/}
-            {/*<mesh position={[0, 0, -5]} scale={10}>*/}
-            {/*    <planeGeometry/>*/}
-            {/*    <meshBasicMaterial color={[10, 0, 0]}/>*/}
-            {/*</mesh>*/}
-        </Environment>
+        {/*<Environment*/}
+        {/*    // background*/}
+        {/*    preset='sunset'*/}
+        {/*    ground={{*/}
+        {/*        height: envMapHeight,*/}
+        {/*        radius: envMapRadius,*/}
+        {/*        scale: envMapScale*/}
+        {/*    }}*/}
+        {/*    // files="./environmentMaps/the_sky_is_on_fire_2k.hdr"*/}
+        {/*    // files={*/}
+        {/*    //     [*/}
+        {/*    //         './environmentMaps/2/px.jpg',*/}
+        {/*    //         './environmentMaps/2/nx.jpg',*/}
+        {/*    //         './environmentMaps/2/py.jpg',*/}
+        {/*    //         './environmentMaps/2/ny.jpg',*/}
+        {/*    //         './environmentMaps/2/pz.jpg',*/}
+        {/*    //         './environmentMaps/2/nz.jpg',*/}
+        {/*    //     ]*/}
+        {/*    // }*/}
+        {/*>*/}
+        {/*<color args={['#000000']} attach='background'/>*/}
+        {/*<Lightformer*/}
+        {/*    position={[0, 0, -5]}*/}
+        {/*    scale={10}*/}
+        {/*    color='red'*/}
+        {/*    intensity={10}*/}
+        {/*    form='ring'*/}
+        {/*/>*/}
+        {/*<mesh position={[0, 0, -5]} scale={10}>*/}
+        {/*    <planeGeometry/>*/}
+        {/*    <meshBasicMaterial color={[10, 0, 0]}/>*/}
+        {/*</mesh>*/}
+        {/*</Environment>*/}
 
         <Perf position="top-left"/>
 
@@ -100,16 +100,16 @@ export default function Experience() {
         {/*    />*/}
         {/*</AccumulativeShadows>*/}
 
-        <ContactShadows
-            position={[0, 0, 0]}
-            scale={10}
-            resolution={512}
-            far={5}
-            color={color}
-            opacity={opacity}
-            blur={blur}
-            frames={1}
-        />
+        {/*<ContactShadows*/}
+        {/*    position={[0, 0, 0]}*/}
+        {/*    scale={10}*/}
+        {/*    resolution={512}*/}
+        {/*    far={5}*/}
+        {/*    color={color}*/}
+        {/*    opacity={opacity}*/}
+        {/*    blur={blur}*/}
+        {/*    frames={1}*/}
+        {/*/>*/}
 
         {/*<directionalLight*/}
         {/*    ref={directionalLight}*/}
@@ -127,6 +127,16 @@ export default function Experience() {
         {/*<ambientLight intensity={1.5}/>*/}
 
         {/*<Sky sunPosition={sunPosition}/>*/}
+
+        {/*<mesh castShadow={true} position-y={1} position-x={-2}>*/}
+        {/*    <sphereGeometry/>*/}
+        {/*    <meshStandardMaterial color="orange"/>*/}
+        {/*</mesh>*/}
+
+        {/*<mesh castShadow={true} position-y={1} ref={cube} position-x={2} scale={1.5}>*/}
+        {/*    <boxGeometry/>*/}
+        {/*    <meshStandardMaterial color="mediumpurple"/>*/}
+        {/*</mesh>*/}
 
         <mesh castShadow={true} position-y={1} position-x={-2}>
             <sphereGeometry/>
