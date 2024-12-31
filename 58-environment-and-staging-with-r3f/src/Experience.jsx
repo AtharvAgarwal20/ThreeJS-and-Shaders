@@ -1,5 +1,5 @@
 import {useFrame, useThree} from '@react-three/fiber'
-import {OrbitControls, useHelper} from '@react-three/drei'
+import {OrbitControls, Stage, useHelper} from '@react-three/drei'
 import {useEffect, useRef} from 'react'
 import {Perf} from 'r3f-perf'
 import * as THREE from "three";
@@ -138,15 +138,17 @@ export default function Experience() {
         {/*    <meshStandardMaterial color="mediumpurple"/>*/}
         {/*</mesh>*/}
 
-        <mesh castShadow={true} position-y={1} position-x={-2}>
-            <sphereGeometry/>
-            <meshStandardMaterial color="orange"/>
-        </mesh>
+        <Stage>
+            <mesh castShadow={true} position-y={1} position-x={-2}>
+                <sphereGeometry/>
+                <meshStandardMaterial color="orange"/>
+            </mesh>
 
-        <mesh castShadow={true} position-y={1} ref={cube} position-x={2} scale={1.5}>
-            <boxGeometry/>
-            <meshStandardMaterial color="mediumpurple"/>
-        </mesh>
+            <mesh castShadow={true} position-y={1} ref={cube} position-x={2} scale={1.5}>
+                <boxGeometry/>
+                <meshStandardMaterial color="mediumpurple"/>
+            </mesh>
+        </Stage>
 
         {/*<mesh receiveShadow={false} position-y={0} rotation-x={-Math.PI * 0.5} scale={10}>*/}
         {/*    <planeGeometry/>*/}
