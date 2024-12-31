@@ -19,7 +19,7 @@ export default function Experience() {
 
         <OrbitControls makeDefault/>
 
-        <directionalLight castShadow={true} position={[1, 2, 3]} intensity={4.5}/>
+        <directionalLight shadow-normalBias={0.04} castShadow={true} position={[1, 2, 3]} intensity={4.5}/>
         <ambientLight intensity={1.5}/>
 
         <mesh receiveShadow={true} position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
@@ -37,7 +37,7 @@ export default function Experience() {
                 />
             )}>
             {/*<Model/>*/}
-            <Hamburger/>
+            <Hamburger scale={0.35}/>
         </Suspense>
     </>
 }
