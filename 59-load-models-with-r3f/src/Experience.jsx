@@ -3,11 +3,11 @@ import {Perf} from 'r3f-perf'
 import Model from "./Model.jsx";
 import {Suspense} from "react";
 
-function FallbackMesh() {
+function Placeholder({position, scale, boxArgs, color}) {
     return (
-        <mesh position={[0, 0.5, 0]} scale={[2, 3, 2]}>
-            <boxGeometry args={[1, 1, 1, 2, 2, 2]}/>
-            <meshBasicMaterial wireframe={true} color="red"/>
+        <mesh position={position} scale={scale}>
+            <boxGeometry args={boxArgs}/>
+            <meshBasicMaterial wireframe={true} color={color}/>
         </mesh>
     );
 }
@@ -27,7 +27,15 @@ export default function Experience() {
             <meshStandardMaterial color="greenyellow"/>
         </mesh>
 
-        <Suspense fallback={<FallbackMesh/>}>
+        <Suspense
+            fallback={(
+                <Placeholder
+                    position={[0, 0.5, 0]}
+                    scale={[2, 3, 2]}
+                    boxArgs={[1, 1, 1, 2, 2, 2]}
+                    color="red"
+                />
+            )}>
             <Model/>
         </Suspense>
     </>
