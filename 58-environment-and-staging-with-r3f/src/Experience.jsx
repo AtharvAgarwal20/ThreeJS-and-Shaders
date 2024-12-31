@@ -1,9 +1,8 @@
-import {useFrame, useThree} from '@react-three/fiber'
+import {useFrame} from '@react-three/fiber'
 import {OrbitControls, Stage, useHelper} from '@react-three/drei'
-import {useEffect, useRef} from 'react'
+import {useRef} from 'react'
 import {Perf} from 'r3f-perf'
 import * as THREE from "three";
-import {useControls} from "leva";
 
 export default function Experience() {
     const directionalLight = useRef(null);
@@ -26,18 +25,18 @@ export default function Experience() {
     //     sunPosition: [1, 2, 3]
     // })
 
-    const {envMapIntensity, envMapHeight, envMapScale, envMapRadius} = useControls('environment', {
-        envMapIntensity: {value: 1.5, min: 0, max: 12},
-        envMapHeight: {value: 7, min: 0, max: 15},
-        envMapRadius: {value: 20, min: 10, max: 1000},
-        envMapScale: {value: 100, min: 10, max: 1000}
-    })
+    // const {envMapIntensity, envMapHeight, envMapScale, envMapRadius} = useControls('environment', {
+    //     envMapIntensity: {value: 1.5, min: 0, max: 12},
+    //     envMapHeight: {value: 7, min: 0, max: 15},
+    //     envMapRadius: {value: 20, min: 10, max: 1000},
+    //     envMapScale: {value: 100, min: 10, max: 1000}
+    // })
 
-    const {scene} = useThree()
-
-    useEffect(() => {
-        scene.environmentIntensity = envMapIntensity
-    }, [envMapIntensity]);
+    // const {scene} = useThree()
+    //
+    // useEffect(() => {
+    //     scene.environmentIntensity = envMapIntensity
+    // }, [envMapIntensity]);
 
     return <>
         {/*<BakeShadows/>*/}
@@ -138,7 +137,16 @@ export default function Experience() {
         {/*    <meshStandardMaterial color="mediumpurple"/>*/}
         {/*</mesh>*/}
 
-        <Stage>
+        <Stage
+            shadows={{
+                type: 'contact',
+                opacity: 0.2,
+                blur: 3
+            }}
+            environment='sunset'
+            preset='portrait'
+            intensity={2}
+        >
             <mesh castShadow={true} position-y={1} position-x={-2}>
                 <sphereGeometry/>
                 <meshStandardMaterial color="orange"/>
